@@ -77,7 +77,9 @@ a {
 
 nav {
   display: flex;
-  gap: 1rem;
+  width: 340px;
+  justify-content: space-between;
+  gap: 0.6rem;
 }
 
 nav a {
@@ -96,6 +98,55 @@ nav a {
   background: #173866;
 }
 
+.skipDropdown {
+  position: relative;
+}
+
+.skipDropdown summary {
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 999px;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid #3f69a0;
+  color: #eff6ff;
+  background: #16345e;
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+
+.skipDropdown summary::-webkit-details-marker {
+  display: none;
+}
+
+.skipDropdownMenu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  display: flex;
+  gap: 0.45rem;
+  padding: 0.45rem;
+  border-radius: 12px;
+  border: 1px solid #3b5f90;
+  background: rgba(15, 35, 64, 0.97);
+  box-shadow: 0 14px 24px rgba(3, 10, 24, 0.35);
+  white-space: nowrap;
+}
+
+.skipDropdown:not([open]) .skipDropdownMenu {
+  display: none;
+}
+
+.skipDropdownMenu a {
+  text-decoration: none;
+  color: #e4efff;
+  border: 1px solid #42689f;
+  border-radius: 999px;
+  padding: 0.38rem 0.66rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
 .hero {
   position: relative;
   min-height: 78vh;
@@ -105,30 +156,6 @@ nav a {
   background-size: cover;
   background-position: center;
   overflow: hidden;
-}
-
-.heroSkips {
-  position: absolute;
-  left: max(10px, calc((100vw - 1120px) / 2 - 84px));
-  top: 48%;
-  transform: translateY(-50%);
-  z-index: 3;
-  display: grid;
-  gap: 0.45rem;
-}
-
-.heroSkips a {
-  text-decoration: none;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  padding: 0.5rem 0.35rem;
-  border-radius: 999px;
-  background: rgba(12, 34, 63, 0.65);
-  border: 1px solid rgba(191, 216, 251, 0.35);
-  color: #ebf3ff;
-  font-size: 0.75rem;
-  letter-spacing: 0.04em;
-  font-weight: 700;
 }
 
 .hero::before {
@@ -305,17 +332,20 @@ h1 {
 
 .reviewsMini {
   background: var(--surface);
-  border: 1px solid var(--line);
+  border: 3px solid #c3d7f3;
   border-radius: 18px;
   box-shadow: 0 12px 30px rgba(16, 38, 71, 0.08);
+  padding: 1rem 1.1rem;
 }
 
 .reviewsMini h2 {
   margin-bottom: 0.5rem;
+  font-size: clamp(1.3rem, 3vw, 2rem);
 }
 
 .reviewsMini p {
   color: var(--muted);
+  font-size: 0.95rem;
 }
 
 .reviewCards {
@@ -327,16 +357,32 @@ h1 {
 
 .reviewCard {
   background: #ffffff;
-  border: 1px solid #d6e3f5;
+  border: 1px solid #c7daf3;
   border-radius: 12px;
-  padding: 0.8rem;
+  padding: 0.9rem;
+}
+
+.reviewName {
+  margin: 0;
+  font-weight: 800;
+  color: #153964;
+}
+
+.reviewStars {
+  margin-top: 0.4rem;
+  width: 116px;
+  height: 22px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #cfdbed;
+  display: block;
 }
 
 .reviewText {
-  margin: 0;
+  margin: 0.55rem 0 0;
   color: #203a5f;
   line-height: 1.45;
-  font-size: 0.93rem;
+  font-size: 0.89rem;
 }
 
 .reviewMeta {
@@ -483,21 +529,7 @@ h1 {
   nav {
     order: 3;
     width: 100%;
-  }
-
-  .heroSkips {
-    position: static;
-    transform: none;
-    grid-template-columns: repeat(3, auto);
-    justify-content: center;
-    padding-top: 1rem;
-    z-index: 4;
-  }
-
-  .heroSkips a {
-    writing-mode: horizontal-tb;
-    transform: none;
-    padding: 0.45rem 0.7rem;
+    justify-content: space-evenly;
   }
 
   .galleryGrid {
