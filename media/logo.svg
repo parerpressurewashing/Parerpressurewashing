@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title>Parer's Pressure Washing Logo</title>
+  <rect width="512" height="512" fill="#fdfefe"/>
+  <circle cx="256" cy="256" r="210" fill="none" stroke="#21447a" stroke-width="8"/>
+  <circle cx="256" cy="256" r="190" fill="none" stroke="#a8bbd4" stroke-width="6"/>
+  <rect x="36" y="196" width="440" height="120" rx="10" fill="#ffffff" stroke="#21447a" stroke-width="8"/>
+  <text x="256" y="102" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="28" fill="#44556f" letter-spacing="3">SERVICING BRISBANE</text>
+  <text x="256" y="138" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="28" fill="#44556f" letter-spacing="3">SURROUNDS</text>
+  <text x="256" y="268" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="43" font-weight="700" fill="#21447a" letter-spacing="1">PARER'S PRESSURE</text>
+  <text x="256" y="314" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="43" font-weight="700" fill="#21447a" letter-spacing="1">WASHING</text>
+  <path d="M178 170c16-28 32-34 56-34h62" stroke="#21447a" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <path d="M296 136h68" stroke="#21447a" stroke-width="9" stroke-linecap="round"/>
+  <path d="M364 136l70 0" stroke="#21447a" stroke-width="9" stroke-linecap="round"/>
+  <path d="M434 136l-10 18" stroke="#21447a" stroke-width="6" stroke-linecap="round"/>
+</svg>
