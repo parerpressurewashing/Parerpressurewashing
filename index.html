@@ -226,30 +226,37 @@
 
           if (status) status.textContent = "Sending request...";
 
+          var payload = new FormData();
+          payload.append("_subject", "Quote request - Parer's Pressure Washing");
+          payload.append("_captcha", "false");
+          payload.append("name", name);
+          payload.append("phone", phone);
+          payload.append("email", email);
+          payload.append("address", address);
+          payload.append("service", service);
+          payload.append("description", description);
+
           fetch("https://formsubmit.co/ajax/parerpressurewashing@gmail.com", {
             method: "POST",
             headers: {
-              "Content-Type": "application/json",
               Accept: "application/json"
             },
-            body: JSON.stringify({
-              _subject: "Quote request - Parer's Pressure Washing",
-              name: name,
-              phone: phone,
-              email: email,
-              address: address,
-              service: service,
-              description: description
-            })
+            body: payload
           })
-            .then(function (response) { return response.json(); })
+            .then(function (response) {
+              if (!response.ok) {
+                throw new Error("Request failed with status " + response.status);
+              }
+              return response.json();
+            })
             .then(function (data) {
-              if (data && data.success === "true") {
+              var isSuccess = data && (data.success === true || data.success === "true" || data.message);
+              if (isSuccess) {
                 if (status) status.textContent = "Request sent. We will contact you shortly.";
                 form.reset();
                 updateWordCount();
               } else {
-                if (status) status.textContent = "Unable to send right now. Please call 0421 559 904.";
+                if (status) status.textContent = "Form service needs activation. Please check parerpressurewashing@gmail.com for FormSubmit activation email.";
               }
             })
             .catch(function () {
