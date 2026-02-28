@@ -150,8 +150,10 @@
             <input id="email" name="email" type="email" autocomplete="email" required />
 
             <label for="address">Address</label>
-            <input id="address" name="address" type="text" autocomplete="street-address" list="address-suggestions" required />
-            <datalist id="address-suggestions"></datalist>
+            <div class="addressFieldWrap">
+              <input id="address" name="address" type="text" autocomplete="street-address" required />
+              <div id="address-options" class="addressOptions" hidden></div>
+            </div>
 
             <label for="service">Service Needed</label>
             <select id="service" name="service" required>
@@ -192,6 +194,11 @@
         if ("scrollRestoration" in history) {
           history.scrollRestoration = "manual";
         }
+        window.addEventListener("pageshow", function () {
+          if (!window.location.hash) {
+            window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+          }
+        });
 
         var reviewTrack = document.getElementById("review-track");
         var reviews = [
@@ -286,7 +293,7 @@
         var emailField = document.getElementById("email");
         var addressField = document.getElementById("address");
         var serviceField = document.getElementById("service");
-        var addressSuggestions = document.getElementById("address-suggestions");
+        var addressOptions = document.getElementById("address-options");
         var addressLookupTimer = null;
         if (!form) return;
 
@@ -333,30 +340,68 @@
           if (status) status.textContent = message;
         }
 
+        function setStatusType(type) {
+          var status = document.getElementById("form-status");
+          if (!status) return;
+          status.classList.remove("is-success", "is-error", "is-pending");
+          if (type) status.classList.add(type);
+        }
+
+        function hideAddressOptions() {
+          if (!addressOptions) return;
+          addressOptions.innerHTML = "";
+          addressOptions.hidden = true;
+        }
+
+        function formatPhotonResult(feature) {
+          if (!feature || !feature.properties) return "";
+          var props = feature.properties;
+          var parts = [];
+          if (props.name) parts.push(props.name);
+          if (props.street && parts.indexOf(props.street) === -1) parts.push(props.street);
+          if (props.suburb) parts.push(props.suburb);
+          if (props.city) parts.push(props.city);
+          if (props.state) parts.push(props.state);
+          if (props.postcode) parts.push(props.postcode);
+          return parts.filter(Boolean).join(", ");
+        }
+
         function updateAddressSuggestions() {
-          if (!addressField || !addressSuggestions) return;
+          if (!addressField || !addressOptions) return;
           var query = addressField.value.trim();
           if (query.length < 2) {
-            addressSuggestions.innerHTML = "";
+            hideAddressOptions();
             return;
           }
 
-          fetch("https://nominatim.openstreetmap.org/search?format=jsonv2&limit=5&countrycodes=au&q=" + encodeURIComponent(query))
+          fetch("https://photon.komoot.io/api/?limit=5&q=" + encodeURIComponent(query + " Australia"))
             .then(function (response) {
               if (!response.ok) return [];
               return response.json();
             })
-            .then(function (results) {
-              if (!Array.isArray(results) || !addressSuggestions) return;
-              addressSuggestions.innerHTML = "";
-              results.forEach(function (item) {
-                var option = document.createElement("option");
-                option.value = item.display_name;
-                addressSuggestions.appendChild(option);
+            .then(function (data) {
+              var features = data && Array.isArray(data.features) ? data.features : [];
+              if (!addressOptions) return;
+              addressOptions.innerHTML = "";
+
+              features.slice(0, 5).forEach(function (feature) {
+                var label = formatPhotonResult(feature);
+                if (!label) return;
+                var button = document.createElement("button");
+                button.type = "button";
+                button.className = "addressOption";
+                button.textContent = label;
+                button.addEventListener("click", function () {
+                  addressField.value = label;
+                  hideAddressOptions();
+                });
+                addressOptions.appendChild(button);
               });
+
+              addressOptions.hidden = addressOptions.children.length === 0;
             })
             .catch(function () {
-              if (addressSuggestions) addressSuggestions.innerHTML = "";
+              hideAddressOptions();
             });
         }
 
@@ -364,6 +409,14 @@
           addressField.addEventListener("input", function () {
             window.clearTimeout(addressLookupTimer);
             addressLookupTimer = window.setTimeout(updateAddressSuggestions, 120);
+          });
+          addressField.addEventListener("focus", function () {
+            if (addressField.value.trim().length >= 2) {
+              updateAddressSuggestions();
+            }
+          });
+          addressField.addEventListener("blur", function () {
+            window.setTimeout(hideAddressOptions, 180);
           });
         }
 
@@ -379,59 +432,69 @@
           var words = wordCount(description);
 
           if (!name) {
+            setStatusType("is-error");
             setStatus("Please enter your name.");
             scrollToField(nameField);
             return;
           }
 
           if (!phone) {
+            setStatusType("is-error");
             setStatus("Please enter your phone number.");
             scrollToField(phoneField);
             return;
           }
 
           if (!isValidPhone(phone)) {
+            setStatusType("is-error");
             setStatus("Please enter a valid phone number.");
             scrollToField(phoneField);
             return;
           }
 
           if (!email) {
+            setStatusType("is-error");
             setStatus("Please enter your email.");
             scrollToField(emailField);
             return;
           }
 
           if (!isValidEmail(email)) {
+            setStatusType("is-error");
             setStatus("Please enter a valid email address.");
             scrollToField(emailField);
             return;
           }
 
           if (!address) {
+            setStatusType("is-error");
             setStatus("Please enter your address.");
             scrollToField(addressField);
             return;
           }
 
           if (!service) {
+            setStatusType("is-error");
             setStatus("Please select a service.");
             scrollToField(serviceField);
             return;
           }
 
           if (!description) {
+            setStatusType("is-error");
             setStatus("Please enter a short description of the job.");
             scrollToField(desc);
             return;
           }
 
           if (words > 50) {
+            setStatusType("is-error");
             setStatus("Please keep the job description to 50 words or less.");
             scrollToField(desc);
             return;
           }
 
+          setStatusType("is-pending");
           setStatus("Sending request...");
 
           var payload = new FormData();
@@ -460,14 +523,18 @@
             .then(function (data) {
               var isSuccess = data && (data.success === true || data.success === "true" || data.message);
               if (isSuccess) {
+                setStatusType("is-success");
                 setStatus("Request sent. We will contact you shortly.");
                 form.reset();
                 updateWordCount();
+                hideAddressOptions();
               } else {
+                setStatusType("is-error");
                 setStatus("Form service needs activation. Please check parerpressurewashing@gmail.com for FormSubmit activation email.");
               }
             })
             .catch(function () {
+              setStatusType("is-error");
               setStatus("Unable to send right now. Please call 0421 559 904.");
             });
         });

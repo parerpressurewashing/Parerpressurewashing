@@ -572,6 +572,41 @@ h1 {
   font: inherit;
 }
 
+.addressFieldWrap {
+  position: relative;
+}
+
+.addressOptions {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 8;
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.45rem;
+  border-radius: 12px;
+  border: 1px solid #c4d7f1;
+  background: #ffffff;
+  box-shadow: 0 16px 26px rgba(14, 31, 58, 0.14);
+}
+
+.addressOption {
+  width: 100%;
+  text-align: left;
+  border: 1px solid #d5e3f5;
+  background: #f7fbff;
+  color: #17355d;
+  border-radius: 10px;
+  padding: 0.6rem 0.7rem;
+  font: inherit;
+  cursor: pointer;
+}
+
+.addressOption:hover {
+  background: #eaf3ff;
+}
+
 .quoteForm textarea {
   resize: vertical;
   min-height: 110px;
@@ -580,6 +615,39 @@ h1 {
 .fieldHelp {
   font-size: 0.82rem;
   color: #4f6585;
+}
+
+#form-status {
+  display: block;
+  min-height: 1.2rem;
+  margin-top: 0.2rem;
+  border-radius: 12px;
+}
+
+#form-status.is-success,
+#form-status.is-error,
+#form-status.is-pending {
+  padding: 0.75rem 0.85rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+#form-status.is-success {
+  background: #e8fff2;
+  color: #0d6b3c;
+  border: 1px solid #9fe0b8;
+}
+
+#form-status.is-error {
+  background: #fff1f1;
+  color: #b42318;
+  border: 1px solid #f0b3ad;
+}
+
+#form-status.is-pending {
+  background: #eef5ff;
+  color: #1e4f9a;
+  border: 1px solid #bfd5f6;
 }
 
 .fieldHelp.over {
