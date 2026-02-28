@@ -137,18 +137,19 @@
             <h2>Tell Us About Your Property</h2>
             <p class="quoteIntro">Submit your details and we will contact you for a quote.</p>
           </div>
-          <form class="quoteForm" id="quote-form" method="POST">
+          <form class="quoteForm" id="quote-form" method="POST" novalidate>
             <label for="name">Name</label>
-            <input id="name" name="name" type="text" required />
+            <input id="name" name="name" type="text" autocomplete="name" required />
 
             <label for="phone">Phone Number</label>
-            <input id="phone" name="phone" type="tel" required />
+            <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required />
 
             <label for="email">Email</label>
-            <input id="email" name="email" type="email" required />
+            <input id="email" name="email" type="email" autocomplete="email" required />
 
             <label for="address">Address</label>
-            <input id="address" name="address" type="text" required />
+            <input id="address" name="address" type="text" autocomplete="street-address" list="address-suggestions" required />
+            <datalist id="address-suggestions"></datalist>
 
             <label for="service">Service Needed</label>
             <select id="service" name="service" required>
@@ -281,6 +282,13 @@
         var form = document.getElementById("quote-form");
         var desc = document.getElementById("description");
         var descHelp = document.getElementById("desc-help");
+        var nameField = document.getElementById("name");
+        var phoneField = document.getElementById("phone");
+        var emailField = document.getElementById("email");
+        var addressField = document.getElementById("address");
+        var serviceField = document.getElementById("service");
+        var addressSuggestions = document.getElementById("address-suggestions");
+        var addressLookupTimer = null;
         if (!form) return;
 
         window.clearTimeout(reviewTimer);
@@ -304,25 +312,128 @@
           updateWordCount();
         }
 
-        form.addEventListener("submit", function (event) {
-          event.preventDefault();
+        function scrollToField(field) {
+          if (!field) return;
+          field.scrollIntoView({ behavior: "smooth", block: "center" });
+          window.setTimeout(function () {
+            field.focus({ preventScroll: true });
+          }, 250);
+        }
 
-          var name = document.getElementById("name").value.trim();
-          var phone = document.getElementById("phone").value.trim();
-          var email = document.getElementById("email").value.trim();
-          var address = document.getElementById("address").value.trim();
-          var service = document.getElementById("service").value.trim();
-          var description = desc ? desc.value.trim() : "";
-          var words = wordCount(description);
+        function isValidEmail(value) {
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        }
+
+        function isValidPhone(value) {
+          var digits = value.replace(/\D/g, "");
+          return digits.length >= 8 && digits.length <= 15;
+        }
+
+        function setStatus(message) {
           var status = document.getElementById("form-status");
+          if (status) status.textContent = message;
+        }
 
-          if (words > 50) {
-            alert("Please keep the job description to 50 words or less.");
-            if (desc) desc.focus();
+        function updateAddressSuggestions() {
+          if (!addressField || !addressSuggestions) return;
+          var query = addressField.value.trim();
+          if (query.length < 4) {
+            addressSuggestions.innerHTML = "";
             return;
           }
 
-          if (status) status.textContent = "Sending request...";
+          fetch("https://nominatim.openstreetmap.org/search?format=jsonv2&limit=5&countrycodes=au&q=" + encodeURIComponent(query))
+            .then(function (response) {
+              if (!response.ok) return [];
+              return response.json();
+            })
+            .then(function (results) {
+              if (!Array.isArray(results) || !addressSuggestions) return;
+              addressSuggestions.innerHTML = "";
+              results.forEach(function (item) {
+                var option = document.createElement("option");
+                option.value = item.display_name;
+                addressSuggestions.appendChild(option);
+              });
+            })
+            .catch(function () {
+              if (addressSuggestions) addressSuggestions.innerHTML = "";
+            });
+        }
+
+        if (addressField) {
+          addressField.addEventListener("input", function () {
+            window.clearTimeout(addressLookupTimer);
+            addressLookupTimer = window.setTimeout(updateAddressSuggestions, 350);
+          });
+        }
+
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          var name = nameField.value.trim();
+          var phone = phoneField.value.trim();
+          var email = emailField.value.trim();
+          var address = addressField.value.trim();
+          var service = serviceField.value.trim();
+          var description = desc ? desc.value.trim() : "";
+          var words = wordCount(description);
+
+          if (!name) {
+            setStatus("Please enter your name.");
+            scrollToField(nameField);
+            return;
+          }
+
+          if (!phone) {
+            setStatus("Please enter your phone number.");
+            scrollToField(phoneField);
+            return;
+          }
+
+          if (!isValidPhone(phone)) {
+            setStatus("Please enter a valid phone number.");
+            scrollToField(phoneField);
+            return;
+          }
+
+          if (!email) {
+            setStatus("Please enter your email.");
+            scrollToField(emailField);
+            return;
+          }
+
+          if (!isValidEmail(email)) {
+            setStatus("Please enter a valid email address.");
+            scrollToField(emailField);
+            return;
+          }
+
+          if (!address) {
+            setStatus("Please enter your address.");
+            scrollToField(addressField);
+            return;
+          }
+
+          if (!service) {
+            setStatus("Please select a service.");
+            scrollToField(serviceField);
+            return;
+          }
+
+          if (!description) {
+            setStatus("Please enter a short description of the job.");
+            scrollToField(desc);
+            return;
+          }
+
+          if (words > 50) {
+            setStatus("Please keep the job description to 50 words or less.");
+            scrollToField(desc);
+            return;
+          }
+
+          setStatus("Sending request...");
 
           var payload = new FormData();
           payload.append("_subject", "Quote request - Parer's Pressure Washing");
@@ -350,15 +461,15 @@
             .then(function (data) {
               var isSuccess = data && (data.success === true || data.success === "true" || data.message);
               if (isSuccess) {
-                if (status) status.textContent = "Request sent. We will contact you shortly.";
+                setStatus("Request sent. We will contact you shortly.");
                 form.reset();
                 updateWordCount();
               } else {
-                if (status) status.textContent = "Form service needs activation. Please check parerpressurewashing@gmail.com for FormSubmit activation email.";
+                setStatus("Form service needs activation. Please check parerpressurewashing@gmail.com for FormSubmit activation email.");
               }
             })
             .catch(function () {
-              if (status) status.textContent = "Unable to send right now. Please call 0421 559 904.";
+              setStatus("Unable to send right now. Please call 0421 559 904.");
             });
         });
 
