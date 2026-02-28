@@ -409,6 +409,11 @@ h1 {
 .reviewsHeadingLink {
   text-decoration: none;
   color: inherit;
+  transition: color 180ms ease;
+}
+
+.reviewsHeadingLink:hover {
+  color: #0b5ee8;
 }
 
 .reviewsMini p {

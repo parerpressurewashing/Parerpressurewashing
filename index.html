@@ -337,7 +337,7 @@
         function updateAddressSuggestions() {
           if (!addressField || !addressSuggestions) return;
           var query = addressField.value.trim();
-          if (query.length < 4) {
+          if (query.length < 2) {
             addressSuggestions.innerHTML = "";
             return;
           }
@@ -364,7 +364,7 @@
         if (addressField) {
           addressField.addEventListener("input", function () {
             window.clearTimeout(addressLookupTimer);
-            addressLookupTimer = window.setTimeout(updateAddressSuggestions, 350);
+            addressLookupTimer = window.setTimeout(updateAddressSuggestions, 120);
           });
         }
 
