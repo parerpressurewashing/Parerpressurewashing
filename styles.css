@@ -749,3 +749,285 @@ h1 {
     grid-template-columns: 1fr;
   }
 }
+
+:focus-visible {
+  outline: 3px solid #69a9ff;
+  outline-offset: 3px;
+}
+
+.sectionIntro {
+  margin: 0.45rem 0 0;
+  max-width: 62ch;
+  color: var(--muted);
+}
+
+.trustRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-bottom: 1rem;
+}
+
+.trustPill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(13, 37, 66, 0.68);
+  border: 1px solid rgba(199, 221, 249, 0.26);
+  color: #eef6ff;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.secondaryBtn {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.78rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(207, 223, 248, 0.5);
+  color: #eff6ff;
+  font-weight: 700;
+  background: rgba(10, 30, 56, 0.35);
+}
+
+.compareCard {
+  min-height: 250px;
+}
+
+.comparisonPair {
+  display: grid;
+  grid-template-columns: 1fr 10px 1fr;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+
+.secondaryPair {
+  margin-top: 0.6rem;
+}
+
+.comparisonDivider {
+  width: 2px;
+  justify-self: center;
+  background: rgba(235, 245, 255, 0.62);
+  border-radius: 999px;
+}
+
+.comparisonDivider.light {
+  background: rgba(227, 239, 255, 0.4);
+}
+
+.serviceGridWide {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.servicePoints {
+  margin: 0.65rem 0 0;
+  padding-left: 1rem;
+  color: #355070;
+}
+
+.servicePoints li {
+  margin: 0.22rem 0;
+}
+
+.serviceAreaSection,
+.pricingCard,
+.contactBackup,
+.faqItem {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(17, 35, 58, 0.08);
+}
+
+.serviceAreaSection {
+  padding: 1.2rem;
+}
+
+.areaChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+}
+
+.areaChips span {
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  background: #f2f8ff;
+  border: 1px solid #cdddF2;
+  font-weight: 600;
+  font-size: 0.88rem;
+}
+
+.pricingSection {
+  padding-top: 0;
+}
+
+.pricingCard {
+  padding: 1.2rem;
+}
+
+.galleryCtaWrap {
+  margin-top: 1rem;
+}
+
+.reviewBadge {
+  display: inline-flex;
+  padding: 0.28rem 0.5rem;
+  border-radius: 999px;
+  background: #eef6ff;
+  border: 1px solid #c6daf7;
+  color: #1f4f90;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.reviewDate {
+  margin: 0.35rem 0 0;
+  color: #647d9f;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.faqGrid {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.faqItem {
+  padding: 0.9rem 1rem;
+}
+
+.faqItem summary {
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.faqItem p {
+  margin: 0.7rem 0 0;
+  color: var(--muted);
+}
+
+.contactBackup {
+  margin-top: 1rem;
+  padding: 1.1rem;
+}
+
+.contactList {
+  margin: 0.7rem 0 0;
+  padding-left: 1rem;
+}
+
+.contactList li {
+  margin: 0.35rem 0;
+  color: var(--muted);
+}
+
+.footerGrid {
+  padding: 1.2rem 0;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+.footerHeading {
+  margin: 0 0 0.45rem;
+  font-weight: 800;
+  color: #eef5ff;
+}
+
+.footerCopy {
+  margin: 0.22rem 0;
+  color: #cfe0f5;
+}
+
+.footerBottom {
+  border-top: 1px solid #29476d;
+  padding: 0.9rem 0 5.5rem;
+  color: #cfe0f5;
+  font-size: 0.9rem;
+}
+
+.mobileCtaBar {
+  display: none;
+}
+
+.galleryHero::before {
+  background-image: url("./media/gb-photo-2.jpg");
+  opacity: 0.34;
+}
+
+.galleryGridLarge {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 1100px) {
+  .serviceGridWide {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footerGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .trustRow {
+    justify-content: center;
+  }
+
+  .serviceGridWide,
+  .galleryGridLarge,
+  .footerGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .comparisonPair {
+    grid-template-columns: 1fr;
+  }
+
+  .comparisonDivider {
+    display: none;
+  }
+
+  .contactBackup {
+    margin-top: 0.9rem;
+  }
+
+  .mobileCtaBar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 60;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    padding: 0.55rem;
+    background: rgba(8, 22, 44, 0.96);
+    border-top: 1px solid #335a90;
+  }
+
+  .mobileCtaBar a {
+    text-decoration: none;
+    text-align: center;
+    padding: 0.8rem 0.7rem;
+    border-radius: 999px;
+    font-weight: 800;
+  }
+
+  .mobileCtaBar a:first-child {
+    background: #1c3962;
+    color: #eef6ff;
+    border: 1px solid #446b9d;
+  }
+
+  .mobileCtaBar a:last-child {
+    background: #0b5ee8;
+    color: #fff;
+  }
+}

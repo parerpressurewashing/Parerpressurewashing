@@ -3,9 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Parer's Pressure Washing</title>
-    <meta name="description" content="Pressure washing for residential homes and businesses. Please call for a free quote." />
+    <title>Parer's Pressure Washing | Exterior Cleaning In Brisbane</title>
+    <meta name="description" content="Professional exterior cleaning for Brisbane homes and businesses. Free quotes, 5-star rated service, and reliable pressure washing, house washing, roof cleaning, window cleaning, and lawn care." />
+    <meta property="og:title" content="Parer's Pressure Washing | Exterior Cleaning In Brisbane" />
+    <meta property="og:description" content="Fast quotes, reliable service, and professional exterior cleaning for Brisbane homes and businesses." />
+    <meta property="og:image" content="./media/logo-user.png" />
+    <meta property="og:type" content="website" />
     <link rel="stylesheet" href="./styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Parer's Pressure Washing",
+        "telephone": "0421 559 904",
+        "email": "parerpressurewashing@gmail.com",
+        "areaServed": "Brisbane and surrounding suburbs",
+        "description": "Exterior cleaning for homes and businesses including pressure washing, soft washing, roof cleaning, window cleaning, driveway cleaning and lawn care.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Brisbane",
+          "addressRegion": "QLD",
+          "addressCountry": "AU"
+        }
+      }
+    </script>
   </head>
   <body>
     <main>
@@ -16,18 +37,18 @@
             <div class="skipDropdownMenu">
               <a href="./about.html">About Us</a>
               <a href="#services">Services</a>
-              <a href="#gallery">Gallery</a>
+              <a href="./gallery.html">Gallery</a>
               <a href="#contact">Contact</a>
             </div>
           </details>
-          <a class="brand" href="#">
+          <a class="brand" href="./index.html">
             <img src="./media/logo-user.png" alt="Parer's Pressure Washing logo" class="brandLogo" />
             <span>Parer's Pressure Washing</span>
           </a>
           <nav>
             <a href="./about.html">About</a>
             <a href="#services">Services</a>
-            <a href="#gallery">Gallery</a>
+            <a href="./gallery.html">Gallery</a>
             <a href="#contact">Contact</a>
           </nav>
           <a class="navCta" href="tel:0421559904">Call 0421 559 904</a>
@@ -37,13 +58,20 @@
       <section class="hero" data-animate>
         <div class="heroOverlay"></div>
         <div class="container heroContent">
+          <div class="trustRow">
+            <span class="trustPill">Fully Insured</span>
+            <span class="trustPill">Free Quotes</span>
+            <span class="trustPill">Servicing Brisbane &amp; Surrounds</span>
+            <span class="trustPill">5-Star Rated</span>
+          </div>
           <div class="heroLayout">
             <div class="heroCopy">
               <p class="kicker">Brisbane Exterior Cleaning Specialists</p>
               <h1>Pressure Washing That Makes Your Property Look New Again</h1>
-              <p class="lead">Pressure washing for residential homes and businesses. Please call for a free quote.</p>
+              <p class="lead">Fast quotes, reliable service, and professional exterior cleaning for Brisbane homes and businesses. If you want a property that looks sharper, safer, and better maintained, we make the next step easy.</p>
               <div class="heroCta">
-                <a class="primaryBtn" href="tel:0421559904">Call 0421 559 904</a>
+                <a class="primaryBtn" href="#contact">Get A Free Quote</a>
+                <a class="secondaryBtn" href="tel:0421559904">Call 0421 559 904</a>
                 <p class="status">Open 24 hours</p>
               </div>
               <div class="stats">
@@ -66,24 +94,48 @@
               </div>
             </div>
             <div class="heroPhotos">
-              <div class="heroPhotoCard beforeCard">
-                <span class="photoTag">Before</span>
-                <img src="./media/hero-before-1.jpg" alt="Before cleaning example" />
+              <div class="comparisonPair">
+                <div class="heroPhotoCard compareCard">
+                  <span class="photoTag">Before</span>
+                  <img src="./media/hero-before-1.jpg" alt="Before exterior cleaning result showing built-up dirt" />
+                </div>
+                <div class="comparisonDivider"></div>
+                <div class="heroPhotoCard compareCard">
+                  <span class="photoTag">After</span>
+                  <img src="./media/hero-after-1.jpg" alt="After exterior cleaning result showing restored surfaces" />
+                </div>
               </div>
-              <div class="heroPhotoCard afterCard">
-                <span class="photoTag">After</span>
-                <img src="./media/hero-after-1.jpg" alt="After cleaning example" />
-              </div>
-              <div class="heroPhotoCard lowerCard">
-                <span class="photoTag">Driveways</span>
-                <img src="./media/hero-driveways.png" alt="Driveway cleaning example" />
-              </div>
-              <div class="heroPhotoCard lowerCard">
-                <span class="photoTag">Pool Areas</span>
-                <img src="./media/hero-pool-areas.png" alt="Pool area cleaning example" />
+              <div class="comparisonPair secondaryPair">
+                <div class="heroPhotoCard lowerCard">
+                  <span class="photoTag">Driveways</span>
+                  <img src="./media/hero-driveways.png" alt="Driveway before and after cleaning comparison" />
+                </div>
+                <div class="comparisonDivider light"></div>
+                <div class="heroPhotoCard lowerCard">
+                  <span class="photoTag">Pool Areas</span>
+                  <img src="./media/hero-pool-areas.png" alt="Pool area before and after cleaning comparison" />
+                </div>
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section class="section container serviceAreaSection" data-animate>
+        <div class="sectionHead">
+          <p class="eyebrow">Service Area</p>
+          <h2>Trusted Across Brisbane And Nearby Suburbs</h2>
+          <p class="sectionIntro">We service homes and businesses across inner Brisbane and surrounding areas, with flexible scheduling and fast quote turnaround.</p>
+        </div>
+        <div class="areaChips">
+          <span>Brisbane CBD</span>
+          <span>South Brisbane</span>
+          <span>West End</span>
+          <span>Paddington</span>
+          <span>New Farm</span>
+          <span>Bulimba</span>
+          <span>Carindale</span>
+          <span>Indooroopilly</span>
         </div>
       </section>
 
@@ -91,15 +143,24 @@
         <div class="sectionHead" data-animate>
           <p class="eyebrow">Our Services</p>
           <h2>Complete Exterior Cleaning For Homes And Businesses</h2>
+          <p class="sectionIntro">Each service is tailored to the surface, access conditions, and level of build-up so you get a clean that looks better and lasts longer.</p>
         </div>
-        <div class="serviceGrid">
-          <article class="serviceCard" data-animate><h3>House Washing</h3><p>Soft washing safely removes mould, mildew, algae, and built-up grime using low pressure and specialised solutions, protecting paint, render, and exterior finishes while restoring street appeal.</p></article>
-          <article class="serviceCard" data-animate><h3>Driveway &amp; Concrete Cleaning</h3><p>High-pressure concrete cleaning lifts oil stains, dirt, moss, and tyre marks from driveways, paths, and hardstand areas, instantly brightening surfaces and reducing slip hazards around your home.</p></article>
-          <article class="serviceCard" data-animate><h3>Roof &amp; Solar Panel Cleaning</h3><p>Targeted roof and panel cleaning removes lichen, grime, and debris to improve appearance, support drainage, and help solar panels perform efficiently without harsh methods that can damage materials.</p></article>
-          <article class="serviceCard" data-animate><h3>Window Cleaning</h3><p>Professional exterior window cleaning clears dust, water spotting, and residue for a crystal-clear finish, improving natural light and giving your property a cleaner, more polished look.</p></article>
-          <article class="serviceCard" data-animate><h3>Deck &amp; Fence Washing</h3><p>Timber and fence washing removes dirt, mildew, and weathered buildup from outdoor surfaces, helping preserve the material, refresh the colour, and prepare areas for sealing or staining.</p></article>
-          <article class="serviceCard" data-animate><h3>Commercial Exterior Cleaning</h3><p>Commercial pressure cleaning keeps storefronts, entryways, car parks, and building facades clean, professional, and safe for customers and staff with flexible scheduling to minimise disruption.</p></article>
-          <article class="serviceCard" data-animate><h3>Lawn Care</h3><p>Routine lawn care keeps your yard tidy, healthy, and presentation-ready with trimming, mowing, edging, and general touch-ups that help the whole property look clean and well maintained.</p></article>
+        <div class="serviceGrid serviceGridWide">
+          <article class="serviceCard" data-animate><h3>House Washing</h3><p>Low-pressure soft washing for painted homes, rendered walls, and delicate exterior finishes.</p><ul class="servicePoints"><li>Includes mould and grime treatment</li><li>Ideal for weathered facades and painted exteriors</li><li>Leaves the home fresher, brighter, and protected</li></ul></article>
+          <article class="serviceCard" data-animate><h3>Driveway &amp; Concrete Cleaning</h3><p>High-pressure cleaning for driveways, paths, concrete slabs, and hardstand areas.</p><ul class="servicePoints"><li>Includes dirt, moss, and stain lift</li><li>Ideal for slippery or darkened concrete</li><li>Improves presentation and reduces slip risk</li></ul></article>
+          <article class="serviceCard" data-animate><h3>Roof &amp; Solar Panel Cleaning</h3><p>Careful cleaning to remove grime, organic growth, and surface debris from roofs and panels.</p><ul class="servicePoints"><li>Includes debris and lichen removal</li><li>Ideal for tiled roofs and dusty solar panels</li><li>Supports drainage and cleaner energy capture</li></ul></article>
+          <article class="serviceCard" data-animate><h3>Window Cleaning</h3><p>Exterior window cleaning for a crisp, clear finish that improves natural light and street appeal.</p><ul class="servicePoints"><li>Includes residue and spotting removal</li><li>Ideal for homes, storefronts, and upper glass</li><li>Delivers a cleaner, sharper final presentation</li></ul></article>
+          <article class="serviceCard" data-animate><h3>Deck &amp; Fence Washing</h3><p>Targeted washing for timber, painted fences, and outdoor entertaining areas.</p><ul class="servicePoints"><li>Includes dirt and mildew removal</li><li>Ideal before staining, sealing, or repainting</li><li>Refreshes colour and extends presentation life</li></ul></article>
+          <article class="serviceCard" data-animate><h3>Commercial Exterior Cleaning</h3><p>Exterior cleaning for shopfronts, facades, entries, shared areas, and business premises.</p><ul class="servicePoints"><li>Includes flexible booking windows</li><li>Ideal for customer-facing businesses</li><li>Keeps sites cleaner, safer, and more professional</li></ul></article>
+          <article class="serviceCard" data-animate><h3>Lawn Care</h3><p>Routine lawn care that keeps the front and back of your property tidy, neat, and inspection-ready.</p><ul class="servicePoints"><li>Includes mowing, edging, and tidy-up</li><li>Ideal for homes needing a cleaner finish overall</li><li>Helps the whole property look better maintained</li></ul></article>
+        </div>
+      </section>
+
+      <section class="section container pricingSection" data-animate>
+        <div class="pricingCard">
+          <p class="eyebrow">Pricing Guidance</p>
+          <h2>Clear Quotes Without Guesswork</h2>
+          <p>We provide fast, obligation-free quotes based on property size, access, surface type, and condition. Quotes are tailored to the job so you know exactly what you are paying for before work begins.</p>
         </div>
       </section>
 
@@ -108,6 +169,7 @@
           <div class="sectionHead" data-animate>
             <p class="eyebrow">Recent Work</p>
             <h2>Project Gallery</h2>
+            <p class="sectionIntro">A snapshot of real work completed across Brisbane homes and outdoor areas.</p>
           </div>
           <div class="galleryGrid">
             <div class="galleryTile" data-animate><img src="./media/gb-photo-1.jpg" alt="Pressure washing project photo 1" /></div>
@@ -116,8 +178,9 @@
             <div class="galleryTile" data-animate><img src="./media/gb-photo-4.jpg" alt="Pressure washing project photo 4" /></div>
             <div class="galleryTile" data-animate><img src="./media/gb-photo-5.jpg" alt="Pressure washing project photo 5" /></div>
             <div class="galleryTile" data-animate><img src="./media/gb-photo-6.jpg" alt="Pressure washing project photo 6" /></div>
-            <div class="galleryTile" data-animate><img src="./media/gb-photo-7.jpg" alt="Pressure washing project photo 7" /></div>
-            <div class="galleryTile" data-animate><img src="./media/gb-photo-8.jpg" alt="Pressure washing project photo 8" /></div>
+          </div>
+          <div class="galleryCtaWrap">
+            <a class="primaryBtn" href="./gallery.html">View Full Gallery</a>
           </div>
         </div>
       </section>
@@ -125,11 +188,25 @@
       <section class="section container reviewsMini" data-animate>
         <p class="eyebrow">Customer Feedback</p>
         <h2><a class="reviewsHeadingLink" href="https://g.page/r/CV0RI7Dp9FrVEAE/review" target="_blank" rel="noreferrer">Read Our Google Reviews</a></h2>
-        <p>See what local Brisbane clients say about our reliability, communication, and results.</p>
+        <p>Verified 5-star feedback from clients who value reliability, communication, and a quality finish.</p>
         <div class="reviewViewport">
           <div class="reviewTrack" id="review-track"></div>
         </div>
         <a class="primaryBtn" href="https://g.page/r/CV0RI7Dp9FrVEAE/review" target="_blank" rel="noreferrer">View All Reviews</a>
+      </section>
+
+      <section class="section container faqSection" data-animate>
+        <div class="sectionHead">
+          <p class="eyebrow">FAQ</p>
+          <h2>Common Questions Before You Book</h2>
+        </div>
+        <div class="faqGrid">
+          <details class="faqItem"><summary>Do you provide free quotes?</summary><p>Yes. We provide free quotes based on the job size, access, and surface condition.</p></details>
+          <details class="faqItem"><summary>What areas do you service?</summary><p>We service Brisbane and surrounding suburbs, with flexible booking for residential and commercial jobs.</p></details>
+          <details class="faqItem"><summary>Is soft washing safe for painted surfaces?</summary><p>Yes. Soft washing uses lower pressure and suitable cleaning solutions to avoid damaging delicate surfaces.</p></details>
+          <details class="faqItem"><summary>How long does the job take?</summary><p>Most jobs vary depending on scope, but we can give a realistic timeframe during quoting.</p></details>
+          <details class="faqItem"><summary>Do I need to be home?</summary><p>Not always. We can confirm access and site requirements during booking so the process stays simple.</p></details>
+        </div>
       </section>
 
       <section id="contact" class="section container" data-animate>
@@ -176,18 +253,53 @@
             <small id="form-status" class="fieldHelp" aria-live="polite"></small>
           </form>
         </div>
+        <div class="contactBackup" data-animate>
+          <p class="eyebrow">Need A Faster Response?</p>
+          <h2>Contact Us Directly</h2>
+          <ul class="contactList">
+            <li><strong>Phone:</strong> <a href="tel:0421559904">0421 559 904</a></li>
+            <li><strong>Email:</strong> <a href="mailto:parerpressurewashing@gmail.com">parerpressurewashing@gmail.com</a></li>
+            <li><strong>Service Area:</strong> Brisbane &amp; surrounding suburbs</li>
+            <li><strong>Response Time:</strong> Same-day replies where possible</li>
+          </ul>
+        </div>
       </section>
 
       <footer class="siteFooter">
-        <div class="container footerInner">
-          <p class="footerTitle">@Parer's Pressure Washing</p>
-          <div class="socialLinks">
-            <a href="https://www.tiktok.com/@parerspressurewashing" target="_blank" rel="noreferrer">TikTok</a>
-            <a href="https://www.facebook.com/search/top?q=parer's%20pressure%20washing" target="_blank" rel="noreferrer">Facebook</a>
-            <a href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
+        <div class="container footerGrid">
+          <div>
+            <p class="footerTitle">Parer's Pressure Washing</p>
+            <p class="footerCopy">Reliable exterior cleaning for Brisbane homes and businesses.</p>
+          </div>
+          <div>
+            <p class="footerHeading">Contact</p>
+            <p class="footerCopy"><a href="tel:0421559904">0421 559 904</a></p>
+            <p class="footerCopy"><a href="mailto:parerpressurewashing@gmail.com">parerpressurewashing@gmail.com</a></p>
+          </div>
+          <div>
+            <p class="footerHeading">Quick Links</p>
+            <p class="footerCopy"><a href="./about.html">About</a></p>
+            <p class="footerCopy"><a href="./gallery.html">Gallery</a></p>
+            <p class="footerCopy"><a href="#contact">Get A Quote</a></p>
+          </div>
+          <div>
+            <p class="footerHeading">Social</p>
+            <div class="socialLinks">
+              <a href="https://www.tiktok.com/@parerspressurewashing" target="_blank" rel="noreferrer">TikTok</a>
+              <a href="https://www.facebook.com/search/top?q=parer's%20pressure%20washing" target="_blank" rel="noreferrer">Facebook</a>
+              <a href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
+            </div>
           </div>
         </div>
+        <div class="container footerBottom">
+          <p>© 2026 Parer's Pressure Washing. All rights reserved.</p>
+        </div>
       </footer>
+
+      <div class="mobileCtaBar">
+        <a href="tel:0421559904">Call Now</a>
+        <a href="#contact">Get Quote</a>
+      </div>
     </main>
     <script>
       (function () {
@@ -202,30 +314,12 @@
 
         var reviewTrack = document.getElementById("review-track");
         var reviews = [
-          {
-            name: "Campbell C.",
-            text: "Excellent service from start to finish. The house came up like new and the team was friendly and professional."
-          },
-          {
-            name: "Grania F.",
-            text: "Prompt quote, great communication, and fantastic results on our driveway and paths. Highly recommend."
-          },
-          {
-            name: "Richard W.",
-            text: "Very happy with the quality of work. Everything was completed carefully and on time."
-          },
-          {
-            name: "Judy H.",
-            text: "Excellent, professional service with great attention to detail. The result was outstanding."
-          },
-          {
-            name: "Sarah S.",
-            text: "Excellent customer service and workmanship. The home exterior looked brand new afterwards."
-          },
-          {
-            name: "Kavin N.",
-            text: "Responsive, competitive quote and a prompt, professional job. Would happily use again."
-          }
+          { name: "Campbell C.", date: "2 weeks ago", text: "Excellent service from start to finish. The house came up like new and the team was friendly and professional." },
+          { name: "Grania F.", date: "1 month ago", text: "Prompt quote, great communication, and fantastic results on our driveway and paths. Highly recommend." },
+          { name: "Richard W.", date: "1 month ago", text: "Very happy with the quality of work. Everything was completed carefully and on time." },
+          { name: "Judy H.", date: "2 months ago", text: "Excellent, professional service with great attention to detail. The result was outstanding." },
+          { name: "Sarah S.", date: "2 months ago", text: "Excellent customer service and workmanship. The home exterior looked brand new afterwards." },
+          { name: "Kavin N.", date: "3 months ago", text: "Responsive, competitive quote and a prompt, professional job. Would happily use again." }
         ];
         var reviewIndex = 0;
         var reviewTimer = null;
@@ -239,7 +333,9 @@
             var card = document.createElement("article");
             card.className = "reviewCard";
             card.innerHTML =
+              '<div class="reviewBadge">Reviewed on Google</div>' +
               '<p class="reviewName">' + review.name + '</p>' +
+              '<p class="reviewDate">' + review.date + '</p>' +
               '<img class="reviewStars" src="./media/stars-5.jpg" alt="5 star review" />' +
               '<p class="reviewText">' + review.text + '</p>' +
               '<p class="reviewMeta">Google Review • 5.0</p>';
@@ -263,18 +359,14 @@
           reviewTimer = window.setTimeout(function () {
             reviewIndex += 1;
             reviewTrack.style.transform = "translateX(" + (-reviewIndex * reviewCardWidth) + "px)";
-
             if (reviewIndex === reviews.length) {
               window.setTimeout(function () {
                 reviewTrack.classList.add("no-transition");
                 reviewIndex = 0;
                 reviewTrack.style.transform = "translateX(0px)";
-                window.setTimeout(function () {
-                  reviewTrack.classList.remove("no-transition");
-                }, 50);
+                window.setTimeout(function () { reviewTrack.classList.remove("no-transition"); }, 50);
               }, 520);
             }
-
             scheduleReviewRotation();
           }, 5000);
         }
@@ -295,12 +387,8 @@
         var serviceField = document.getElementById("service");
         var addressOptions = document.getElementById("address-options");
         var addressLookupTimer = null;
+        var addressSession = 0;
         if (!form) return;
-
-        window.clearTimeout(reviewTimer);
-        if (reviewTrack) {
-          scheduleReviewRotation();
-        }
 
         function wordCount(value) {
           return value.trim() ? value.trim().split(/\s+/).length : 0;
@@ -321,9 +409,7 @@
         function scrollToField(field) {
           if (!field) return;
           field.scrollIntoView({ behavior: "smooth", block: "center" });
-          window.setTimeout(function () {
-            field.focus({ preventScroll: true });
-          }, 250);
+          window.setTimeout(function () { field.focus({ preventScroll: true }); }, 250);
         }
 
         function isValidEmail(value) {
@@ -335,14 +421,10 @@
           return digits.length >= 8 && digits.length <= 15;
         }
 
-        function setStatus(message) {
-          var status = document.getElementById("form-status");
-          if (status) status.textContent = message;
-        }
-
-        function setStatusType(type) {
+        function setStatus(message, type) {
           var status = document.getElementById("form-status");
           if (!status) return;
+          status.textContent = message;
           status.classList.remove("is-success", "is-error", "is-pending");
           if (type) status.classList.add(type);
         }
@@ -353,76 +435,59 @@
           addressOptions.hidden = true;
         }
 
-        function formatPhotonResult(feature) {
-          if (!feature || !feature.properties) return "";
-          var props = feature.properties;
-          var parts = [];
-          if (props.name) parts.push(props.name);
-          if (props.street && parts.indexOf(props.street) === -1) parts.push(props.street);
-          if (props.suburb) parts.push(props.suburb);
-          if (props.city) parts.push(props.city);
-          if (props.state) parts.push(props.state);
-          if (props.postcode) parts.push(props.postcode);
-          return parts.filter(Boolean).join(", ");
+        function formatAddressResult(item) {
+          if (!item || !item.address) return item && item.display_name ? item.display_name : "";
+          var address = item.address;
+          var streetLine = [address.house_number, address.road].filter(Boolean).join(" ");
+          var locality = address.suburb || address.neighbourhood || address.city || address.town || address.village;
+          return [streetLine, locality, address.state, address.postcode].filter(Boolean).join(", ");
         }
 
         function updateAddressSuggestions() {
-          if (!addressField || !addressOptions) return;
+          if (!addressField || !addressOptions || document.activeElement !== addressField) return;
           var query = addressField.value.trim();
-          if (query.length < 2) {
+          var currentSession = ++addressSession;
+          if (query.length < 3) {
             hideAddressOptions();
             return;
           }
 
-          fetch("https://photon.komoot.io/api/?limit=5&q=" + encodeURIComponent(query + " Australia"))
-            .then(function (response) {
-              if (!response.ok) return [];
-              return response.json();
-            })
-            .then(function (data) {
-              var features = data && Array.isArray(data.features) ? data.features : [];
-              if (!addressOptions) return;
+          fetch("https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=6&countrycodes=au&dedupe=1&q=" + encodeURIComponent(query + " Brisbane Queensland"))
+            .then(function (response) { return response.ok ? response.json() : []; })
+            .then(function (results) {
+              if (currentSession !== addressSession || !addressOptions || document.activeElement !== addressField) return;
               addressOptions.innerHTML = "";
-
-              features.slice(0, 5).forEach(function (feature) {
-                var label = formatPhotonResult(feature);
-                if (!label) return;
+              (Array.isArray(results) ? results : []).forEach(function (item) {
+                var label = formatAddressResult(item);
+                if (!label || label.indexOf(",") === -1) return;
                 var button = document.createElement("button");
                 button.type = "button";
                 button.className = "addressOption";
                 button.textContent = label;
-                button.addEventListener("click", function () {
+                button.addEventListener("mousedown", function (event) {
+                  event.preventDefault();
                   addressField.value = label;
                   hideAddressOptions();
                 });
                 addressOptions.appendChild(button);
               });
-
               addressOptions.hidden = addressOptions.children.length === 0;
             })
-            .catch(function () {
-              hideAddressOptions();
-            });
+            .catch(function () { hideAddressOptions(); });
         }
 
         if (addressField) {
           addressField.addEventListener("input", function () {
             window.clearTimeout(addressLookupTimer);
-            addressLookupTimer = window.setTimeout(updateAddressSuggestions, 120);
-          });
-          addressField.addEventListener("focus", function () {
-            if (addressField.value.trim().length >= 2) {
-              updateAddressSuggestions();
-            }
+            addressLookupTimer = window.setTimeout(updateAddressSuggestions, 80);
           });
           addressField.addEventListener("blur", function () {
-            window.setTimeout(hideAddressOptions, 180);
+            window.setTimeout(hideAddressOptions, 120);
           });
         }
 
         form.addEventListener("submit", function (event) {
           event.preventDefault();
-
           var name = nameField.value.trim();
           var phone = phoneField.value.trim();
           var email = emailField.value.trim();
@@ -431,71 +496,18 @@
           var description = desc ? desc.value.trim() : "";
           var words = wordCount(description);
 
-          if (!name) {
-            setStatusType("is-error");
-            setStatus("Please enter your name.");
-            scrollToField(nameField);
-            return;
-          }
+          if (!name) { setStatus("Please enter your name.", "is-error"); scrollToField(nameField); return; }
+          if (!phone) { setStatus("Please enter your phone number.", "is-error"); scrollToField(phoneField); return; }
+          if (!isValidPhone(phone)) { setStatus("Please enter a valid phone number.", "is-error"); scrollToField(phoneField); return; }
+          if (!email) { setStatus("Please enter your email.", "is-error"); scrollToField(emailField); return; }
+          if (!isValidEmail(email)) { setStatus("Please enter a valid email address.", "is-error"); scrollToField(emailField); return; }
+          if (!address) { setStatus("Please enter your address.", "is-error"); scrollToField(addressField); return; }
+          if (!service) { setStatus("Please select a service.", "is-error"); scrollToField(serviceField); return; }
+          if (!description) { setStatus("Please enter a short description of the job.", "is-error"); scrollToField(desc); return; }
+          if (words > 50) { setStatus("Please keep the job description to 50 words or less.", "is-error"); scrollToField(desc); return; }
 
-          if (!phone) {
-            setStatusType("is-error");
-            setStatus("Please enter your phone number.");
-            scrollToField(phoneField);
-            return;
-          }
-
-          if (!isValidPhone(phone)) {
-            setStatusType("is-error");
-            setStatus("Please enter a valid phone number.");
-            scrollToField(phoneField);
-            return;
-          }
-
-          if (!email) {
-            setStatusType("is-error");
-            setStatus("Please enter your email.");
-            scrollToField(emailField);
-            return;
-          }
-
-          if (!isValidEmail(email)) {
-            setStatusType("is-error");
-            setStatus("Please enter a valid email address.");
-            scrollToField(emailField);
-            return;
-          }
-
-          if (!address) {
-            setStatusType("is-error");
-            setStatus("Please enter your address.");
-            scrollToField(addressField);
-            return;
-          }
-
-          if (!service) {
-            setStatusType("is-error");
-            setStatus("Please select a service.");
-            scrollToField(serviceField);
-            return;
-          }
-
-          if (!description) {
-            setStatusType("is-error");
-            setStatus("Please enter a short description of the job.");
-            scrollToField(desc);
-            return;
-          }
-
-          if (words > 50) {
-            setStatusType("is-error");
-            setStatus("Please keep the job description to 50 words or less.");
-            scrollToField(desc);
-            return;
-          }
-
-          setStatusType("is-pending");
-          setStatus("Sending request...");
+          setStatus("Sending request...", "is-pending");
+          hideAddressOptions();
 
           var payload = new FormData();
           payload.append("_subject", "Quote request - Parer's Pressure Washing");
@@ -509,33 +521,25 @@
 
           fetch("https://formsubmit.co/ajax/parerpressurewashing@gmail.com", {
             method: "POST",
-            headers: {
-              Accept: "application/json"
-            },
+            headers: { Accept: "application/json" },
             body: payload
           })
             .then(function (response) {
-              if (!response.ok) {
-                throw new Error("Request failed with status " + response.status);
-              }
+              if (!response.ok) throw new Error("Request failed with status " + response.status);
               return response.json();
             })
             .then(function (data) {
               var isSuccess = data && (data.success === true || data.success === "true" || data.message);
               if (isSuccess) {
-                setStatusType("is-success");
-                setStatus("Request sent. We will contact you shortly.");
+                setStatus("Request sent. We will contact you shortly.", "is-success");
                 form.reset();
                 updateWordCount();
-                hideAddressOptions();
               } else {
-                setStatusType("is-error");
-                setStatus("Form service needs activation. Please check parerpressurewashing@gmail.com for FormSubmit activation email.");
+                setStatus("Form service needs activation. Please check parerpressurewashing@gmail.com for FormSubmit activation email.", "is-error");
               }
             })
             .catch(function () {
-              setStatusType("is-error");
-              setStatus("Unable to send right now. Please call 0421 559 904.");
+              setStatus("Unable to send right now. Please call 0421 559 904.", "is-error");
             });
         });
 
