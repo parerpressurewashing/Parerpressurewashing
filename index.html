@@ -10,6 +10,9 @@
     <meta property="og:image" content="./media/logo-user.png" />
     <meta property="og:type" content="website" />
     <link rel="stylesheet" href="./styles.css" />
+    <script>
+      window.PARER_GOOGLE_MAPS_API_KEY = "";
+    </script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -94,27 +97,21 @@
               </div>
             </div>
             <div class="heroPhotos">
-              <div class="comparisonPair">
-                <div class="heroPhotoCard compareCard">
-                  <span class="photoTag">Before</span>
-                  <img src="./media/hero-before-1.jpg" alt="Before exterior cleaning result showing built-up dirt" />
-                </div>
-                <div class="comparisonDivider"></div>
-                <div class="heroPhotoCard compareCard">
-                  <span class="photoTag">After</span>
-                  <img src="./media/hero-after-1.jpg" alt="After exterior cleaning result showing restored surfaces" />
-                </div>
+              <div class="heroPhotoCard beforeCard">
+                <span class="photoTag">Before</span>
+                <img src="./media/hero-before-1.jpg" alt="Before exterior cleaning result showing built-up dirt" width="527" height="700" />
               </div>
-              <div class="comparisonPair secondaryPair">
-                <div class="heroPhotoCard lowerCard">
-                  <span class="photoTag">Driveways</span>
-                  <img src="./media/hero-driveways.png" alt="Driveway before and after cleaning comparison" />
-                </div>
-                <div class="comparisonDivider light"></div>
-                <div class="heroPhotoCard lowerCard">
-                  <span class="photoTag">Pool Areas</span>
-                  <img src="./media/hero-pool-areas.png" alt="Pool area before and after cleaning comparison" />
-                </div>
+              <div class="heroPhotoCard afterCard">
+                <span class="photoTag">After</span>
+                <img src="./media/hero-after-1.jpg" alt="After exterior cleaning result showing restored surfaces" width="528" height="700" />
+              </div>
+              <div class="heroPhotoCard lowerCard">
+                <span class="photoTag">Driveways</span>
+                <img src="./media/hero-driveways.png" alt="Driveway before and after cleaning comparison" width="1020" height="1020" />
+              </div>
+              <div class="heroPhotoCard lowerCard">
+                <span class="photoTag">Pool Areas</span>
+                <img src="./media/hero-pool-areas.png" alt="Pool area before and after cleaning comparison" width="1020" height="1020" />
               </div>
             </div>
           </div>
@@ -172,12 +169,12 @@
             <p class="sectionIntro">A snapshot of real work completed across Brisbane homes and outdoor areas.</p>
           </div>
           <div class="galleryGrid">
-            <div class="galleryTile" data-animate><img src="./media/gb-photo-1.jpg" alt="Pressure washing project photo 1" /></div>
-            <div class="galleryTile" data-animate><img src="./media/gb-photo-2.jpg" alt="Pressure washing project photo 2" /></div>
-            <div class="galleryTile" data-animate><img src="./media/gb-photo-3.jpg" alt="Pressure washing project photo 3" /></div>
-            <div class="galleryTile" data-animate><img src="./media/gb-photo-4.jpg" alt="Pressure washing project photo 4" /></div>
-            <div class="galleryTile" data-animate><img src="./media/gb-photo-5.jpg" alt="Pressure washing project photo 5" /></div>
-            <div class="galleryTile" data-animate><img src="./media/gb-photo-6.jpg" alt="Pressure washing project photo 6" /></div>
+            <div class="galleryTile" data-animate><img src="./media/gb-photo-1.jpg" alt="Pressure washing project photo 1" width="800" height="800" /></div>
+            <div class="galleryTile" data-animate><img src="./media/gb-photo-2.jpg" alt="Pressure washing project photo 2" width="800" height="800" /></div>
+            <div class="galleryTile" data-animate><img src="./media/gb-photo-3.jpg" alt="Pressure washing project photo 3" width="800" height="800" /></div>
+            <div class="galleryTile" data-animate><img src="./media/gb-photo-4.jpg" alt="Pressure washing project photo 4" width="800" height="800" /></div>
+            <div class="galleryTile" data-animate><img src="./media/gb-photo-5.jpg" alt="Pressure washing project photo 5" width="800" height="800" /></div>
+            <div class="galleryTile" data-animate><img src="./media/gb-photo-6.jpg" alt="Pressure washing project photo 6" width="800" height="800" /></div>
           </div>
           <div class="galleryCtaWrap">
             <a class="primaryBtn" href="./gallery.html">View Full Gallery</a>
@@ -211,47 +208,60 @@
 
       <section id="contact" class="section container" data-animate>
         <div class="quoteFormWrap" data-animate>
-          <div>
+          <div class="quoteInfoColumn">
             <p class="eyebrow">Get A Quote</p>
             <h2>Tell Us About Your Property</h2>
             <p class="quoteIntro">Submit your details and we will contact you for a quote.</p>
-          </div>
-          <form class="quoteForm" id="quote-form" method="POST" novalidate>
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text" autocomplete="name" required />
-
-            <label for="phone">Phone Number</label>
-            <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required />
-
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" autocomplete="email" required />
-
-            <label for="address">Address</label>
-            <div class="addressFieldWrap">
-              <input id="address" name="address" type="text" autocomplete="street-address" required />
-              <div id="address-options" class="addressOptions" hidden></div>
+            <p class="quoteTrustLine">Common bookings in Ashgrove, Paddington, New Farm, and surrounding Brisbane suburbs.</p>
+            <div class="nextSteps">
+              <h3>What Happens Next</h3>
+              <p>We review your request, confirm the property details, and contact you with the next available quote and booking options.</p>
             </div>
+          </div>
+          <div class="quoteFormColumn">
+            <form class="quoteForm" id="quote-form" method="POST" novalidate>
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" autocomplete="name" required />
 
-            <label for="service">Service Needed</label>
-            <select id="service" name="service" required>
-              <option value="" disabled selected>Select a service</option>
-              <option value="House Washing">House Washing</option>
-              <option value="Driveway & Concrete Cleaning">Driveway & Concrete Cleaning</option>
-              <option value="Roof & Solar Panel Cleaning">Roof & Solar Panel Cleaning</option>
-              <option value="Window Cleaning">Window Cleaning</option>
-              <option value="Pressure Washing">Pressure Washing</option>
-              <option value="Deck & Fence Washing">Deck & Fence Washing</option>
-              <option value="Commercial Exterior Cleaning">Commercial Exterior Cleaning</option>
-              <option value="Lawn Care">Lawn Care</option>
-            </select>
+              <label for="phone">Phone Number</label>
+              <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required />
 
-            <label for="description">Job Description (max 50 words)</label>
-            <textarea id="description" name="description" rows="4" required></textarea>
-            <small id="desc-help" class="fieldHelp">0/50 words</small>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
 
-            <button class="primaryBtn" type="submit">Request Quote</button>
-            <small id="form-status" class="fieldHelp" aria-live="polite"></small>
-          </form>
+              <label for="address">Address</label>
+              <div class="addressFieldWrap">
+                <input id="address" name="address" type="text" autocomplete="street-address" placeholder="Start typing your full street address" required />
+                <div id="address-options" class="addressOptions" hidden></div>
+              </div>
+
+              <label for="service">Service Needed</label>
+              <select id="service" name="service" required>
+                <option value="" disabled selected>Select a service</option>
+                <option value="House Washing">House Washing</option>
+                <option value="Driveway & Concrete Cleaning">Driveway & Concrete Cleaning</option>
+                <option value="Roof & Solar Panel Cleaning">Roof & Solar Panel Cleaning</option>
+                <option value="Window Cleaning">Window Cleaning</option>
+                <option value="Pressure Washing">Pressure Washing</option>
+                <option value="Deck & Fence Washing">Deck & Fence Washing</option>
+                <option value="Commercial Exterior Cleaning">Commercial Exterior Cleaning</option>
+                <option value="Lawn Care">Lawn Care</option>
+              </select>
+
+              <label for="description">Job Description (max 50 words)</label>
+              <textarea id="description" name="description" rows="4" required></textarea>
+              <small id="desc-help" class="fieldHelp">0/50 words</small>
+
+              <button class="primaryBtn" type="submit">Request Quote</button>
+              <small id="form-status" class="fieldHelp" aria-live="polite"></small>
+            </form>
+            <div id="success-panel" class="successPanel" hidden>
+              <p class="eyebrow">Request Received</p>
+              <h3>Thank You</h3>
+              <p>We have your request and will contact you shortly to confirm the details and next available booking time.</p>
+              <a class="secondaryBtn successCall" href="tel:0421559904">Need us sooner? Call 0421 559 904</a>
+            </div>
+          </div>
         </div>
         <div class="contactBackup" data-animate>
           <p class="eyebrow">Need A Faster Response?</p>
@@ -386,8 +396,14 @@
         var addressField = document.getElementById("address");
         var serviceField = document.getElementById("service");
         var addressOptions = document.getElementById("address-options");
+        var successPanel = document.getElementById("success-panel");
         var addressLookupTimer = null;
         var addressSession = 0;
+        var googleMapsApiKey = window.PARER_GOOGLE_MAPS_API_KEY || "";
+        var googlePlacesReady = false;
+        var googlePlacesLoading = null;
+        var googleAutocompleteService = null;
+        var googlePlacesService = null;
         if (!form) return;
 
         function wordCount(value) {
@@ -417,8 +433,11 @@
         }
 
         function isValidPhone(value) {
-          var digits = value.replace(/\D/g, "");
-          return digits.length >= 8 && digits.length <= 15;
+          var normalized = value.replace(/[^\d+]/g, "");
+          if (/^0[23478]\d{8}$/.test(normalized)) return true;
+          if (/^\+61[23478]\d{8}$/.test(normalized)) return true;
+          if (/^61[23478]\d{8}$/.test(normalized)) return true;
+          return false;
         }
 
         function setStatus(message, type) {
@@ -430,9 +449,32 @@
         }
 
         function hideAddressOptions() {
+          addressSession += 1;
           if (!addressOptions) return;
           addressOptions.innerHTML = "";
           addressOptions.hidden = true;
+        }
+
+        function setSuggestionOptions(items) {
+          if (!addressOptions || !addressField) return;
+          addressOptions.innerHTML = "";
+          items.forEach(function (item) {
+            var button = document.createElement("button");
+            button.type = "button";
+            button.className = "addressOption";
+            button.textContent = item.label;
+            button.addEventListener("mousedown", function (event) {
+              event.preventDefault();
+              if (item.onSelect) {
+                item.onSelect();
+              } else {
+                addressField.value = item.label;
+                hideAddressOptions();
+              }
+            });
+            addressOptions.appendChild(button);
+          });
+          addressOptions.hidden = items.length === 0;
         }
 
         function formatAddressResult(item) {
@@ -441,6 +483,83 @@
           var streetLine = [address.house_number, address.road].filter(Boolean).join(" ");
           var locality = address.suburb || address.neighbourhood || address.city || address.town || address.village;
           return [streetLine, locality, address.state, address.postcode].filter(Boolean).join(", ");
+        }
+
+        function initGooglePlacesServices() {
+          if (!window.google || !window.google.maps || !window.google.maps.places) return false;
+          googleAutocompleteService = new window.google.maps.places.AutocompleteService();
+          googlePlacesService = new window.google.maps.places.PlacesService(document.createElement("div"));
+          googlePlacesReady = true;
+          return true;
+        }
+
+        function loadGooglePlaces() {
+          if (!googleMapsApiKey) return Promise.resolve(false);
+          if (googlePlacesReady) return Promise.resolve(true);
+          if (googlePlacesLoading) return googlePlacesLoading;
+          googlePlacesLoading = new Promise(function (resolve) {
+            if (initGooglePlacesServices()) {
+              resolve(true);
+              return;
+            }
+            var script = document.createElement("script");
+            script.src = "https://maps.googleapis.com/maps/api/js?key=" + encodeURIComponent(googleMapsApiKey) + "&libraries=places";
+            script.async = true;
+            script.defer = true;
+            script.onload = function () { resolve(initGooglePlacesServices()); };
+            script.onerror = function () { resolve(false); };
+            document.head.appendChild(script);
+          });
+          return googlePlacesLoading;
+        }
+
+        function updateAddressSuggestionsFallback(query, currentSession) {
+          fetch("https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=6&countrycodes=au&dedupe=1&q=" + encodeURIComponent(query + " Brisbane Queensland"))
+            .then(function (response) { return response.ok ? response.json() : []; })
+            .then(function (results) {
+              if (currentSession !== addressSession || !addressOptions || document.activeElement !== addressField) return;
+              var items = (Array.isArray(results) ? results : []).map(function (item) {
+                var label = formatAddressResult(item);
+                return label && label.indexOf(",") !== -1 ? { label: label } : null;
+              }).filter(Boolean);
+              setSuggestionOptions(items);
+            })
+            .catch(function () { hideAddressOptions(); });
+        }
+
+        function updateAddressSuggestionsGoogle(query, currentSession) {
+          if (!googleAutocompleteService || !googlePlacesService) {
+            updateAddressSuggestionsFallback(query, currentSession);
+            return;
+          }
+          googleAutocompleteService.getPlacePredictions({
+            input: query,
+            componentRestrictions: { country: "au" },
+            types: ["address"]
+          }, function (predictions, status) {
+            if (currentSession !== addressSession || !addressOptions || document.activeElement !== addressField) return;
+            if (!predictions || status !== window.google.maps.places.PlacesServiceStatus.OK) {
+              hideAddressOptions();
+              return;
+            }
+            var items = predictions.slice(0, 6).map(function (prediction) {
+              return {
+                label: prediction.description,
+                onSelect: function () {
+                  googlePlacesService.getDetails({
+                    placeId: prediction.place_id,
+                    fields: ["formatted_address"]
+                  }, function (place, detailStatus) {
+                    addressField.value = detailStatus === window.google.maps.places.PlacesServiceStatus.OK && place && place.formatted_address
+                      ? place.formatted_address
+                      : prediction.description;
+                    hideAddressOptions();
+                  });
+                }
+              };
+            });
+            setSuggestionOptions(items);
+          });
         }
 
         function updateAddressSuggestions() {
@@ -452,28 +571,24 @@
             return;
           }
 
-          fetch("https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=6&countrycodes=au&dedupe=1&q=" + encodeURIComponent(query + " Brisbane Queensland"))
-            .then(function (response) { return response.ok ? response.json() : []; })
-            .then(function (results) {
-              if (currentSession !== addressSession || !addressOptions || document.activeElement !== addressField) return;
-              addressOptions.innerHTML = "";
-              (Array.isArray(results) ? results : []).forEach(function (item) {
-                var label = formatAddressResult(item);
-                if (!label || label.indexOf(",") === -1) return;
-                var button = document.createElement("button");
-                button.type = "button";
-                button.className = "addressOption";
-                button.textContent = label;
-                button.addEventListener("mousedown", function (event) {
-                  event.preventDefault();
-                  addressField.value = label;
-                  hideAddressOptions();
-                });
-                addressOptions.appendChild(button);
-              });
-              addressOptions.hidden = addressOptions.children.length === 0;
-            })
-            .catch(function () { hideAddressOptions(); });
+          if (googlePlacesReady) {
+            updateAddressSuggestionsGoogle(query, currentSession);
+            return;
+          }
+
+          if (googleMapsApiKey) {
+            loadGooglePlaces().then(function (loaded) {
+              if (currentSession !== addressSession || document.activeElement !== addressField) return;
+              if (loaded) {
+                updateAddressSuggestionsGoogle(query, currentSession);
+              } else {
+                updateAddressSuggestionsFallback(query, currentSession);
+              }
+            });
+            return;
+          }
+
+          updateAddressSuggestionsFallback(query, currentSession);
         }
 
         if (addressField) {
@@ -498,7 +613,7 @@
 
           if (!name) { setStatus("Please enter your name.", "is-error"); scrollToField(nameField); return; }
           if (!phone) { setStatus("Please enter your phone number.", "is-error"); scrollToField(phoneField); return; }
-          if (!isValidPhone(phone)) { setStatus("Please enter a valid phone number.", "is-error"); scrollToField(phoneField); return; }
+          if (!isValidPhone(phone)) { setStatus("Please enter a valid Australian phone number.", "is-error"); scrollToField(phoneField); return; }
           if (!email) { setStatus("Please enter your email.", "is-error"); scrollToField(emailField); return; }
           if (!isValidEmail(email)) { setStatus("Please enter a valid email address.", "is-error"); scrollToField(emailField); return; }
           if (!address) { setStatus("Please enter your address.", "is-error"); scrollToField(addressField); return; }
@@ -532,6 +647,8 @@
               var isSuccess = data && (data.success === true || data.success === "true" || data.message);
               if (isSuccess) {
                 setStatus("Request sent. We will contact you shortly.", "is-success");
+                form.hidden = true;
+                if (successPanel) successPanel.hidden = false;
                 form.reset();
                 updateWordCount();
               } else {
