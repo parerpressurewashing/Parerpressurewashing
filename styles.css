@@ -50,8 +50,9 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 68px;
-  gap: 1rem;
+  min-height: 54px;
+  gap: 0.8rem;
+  padding: 0.42rem 0;
 }
 
 .brand {
@@ -66,36 +67,53 @@ a {
 }
 
 .brandLogo {
-  width: 96px;
+  width: 78px;
   height: auto;
-  border-radius: 10px;
+  border-radius: 8px;
   border: 1px solid #b6c9e4;
   background: #fff;
-  padding: 3px;
-  box-shadow: 0 8px 20px rgba(18, 39, 73, 0.18);
+  padding: 2px;
+  box-shadow: 0 6px 16px rgba(18, 39, 73, 0.18);
 }
 
 nav {
   display: flex;
-  width: 340px;
-  justify-content: space-between;
-  gap: 0.6rem;
+  width: auto;
+  justify-content: flex-end;
+  gap: 0.45rem;
+  flex: 1;
+  margin-left: auto;
 }
 
 nav a {
   text-decoration: none;
-  color: #dce9fb;
-  font-weight: 600;
+  color: #e7f0ff;
+  font-weight: 700;
+  font-size: 0.87rem;
+  padding: 0.42rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(89, 127, 180, 0.56);
+  background: rgba(18, 50, 92, 0.52);
+  transition: background 180ms ease, border-color 180ms ease, transform 180ms ease, color 180ms ease;
+}
+
+nav a:hover,
+nav a[aria-current="page"] {
+  background: rgba(36, 88, 160, 0.88);
+  border-color: rgba(163, 200, 255, 0.9);
+  color: #ffffff;
+  transform: translateY(-1px);
 }
 
 .navCta {
   text-decoration: none;
   border-radius: 999px;
-  padding: 0.58rem 0.9rem;
-  border: 1px solid #3f69a0;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid #5f89bf;
   color: #eff6ff;
   font-weight: 700;
-  background: #173866;
+  white-space: nowrap;
+  background: linear-gradient(180deg, #23487a 0%, #173866 100%);
 }
 
 .skipDropdown {
@@ -780,14 +798,17 @@ h1 {
 @media (max-width: 900px) {
   .navInner {
     min-height: auto;
-    padding: 0.8rem 0;
+    padding: 0.5rem 0;
     flex-wrap: wrap;
   }
 
   nav {
     order: 3;
     width: 100%;
-    justify-content: space-evenly;
+    justify-content: center;
+    flex: none;
+    margin-left: 0;
+    gap: 0.35rem;
   }
 
   .heroLayout {
@@ -829,7 +850,21 @@ h1 {
   }
 
   .brandLogo {
-    width: 76px;
+    width: 64px;
+  }
+
+  .brand span {
+    font-size: 0.9rem;
+  }
+
+  nav a {
+    font-size: 0.76rem;
+    padding: 0.34rem 0.54rem;
+  }
+
+  .navCta {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.62rem;
   }
 
   h1 {
