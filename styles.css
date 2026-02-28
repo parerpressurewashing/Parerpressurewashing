@@ -169,6 +169,11 @@ nav a {
   transform: scale(1.03);
 }
 
+.aboutHero::before {
+  background-image: url("./media/gb-photo-5.jpg");
+  opacity: 0.34;
+}
+
 .heroOverlay {
   position: absolute;
   inset: 0;
@@ -193,6 +198,10 @@ nav a {
 
 .heroCopy {
   min-width: 0;
+}
+
+.aboutLayout {
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 380px);
 }
 
 .heroPhotos {
@@ -385,6 +394,34 @@ h1 {
   margin: 0.5rem 0 0;
   color: var(--muted);
   line-height: 1.45;
+}
+
+.aboutContent {
+  padding-top: 2.4rem;
+}
+
+.aboutGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.aboutCard {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(17, 35, 58, 0.08);
+  padding: 1.15rem;
+}
+
+.aboutCard h2 {
+  margin-bottom: 0.55rem;
+}
+
+.aboutCard p:last-child {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
 }
 
 .gallerySection {
@@ -629,6 +666,10 @@ h1 {
   }
 
   .serviceGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .aboutGrid {
     grid-template-columns: 1fr;
   }
 
