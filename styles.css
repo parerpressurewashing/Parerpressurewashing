@@ -228,9 +228,8 @@ nav a {
   min-height: 260px;
 }
 
-.detailCard {
+.lowerCard {
   min-height: 180px;
-  grid-column: span 2;
 }
 
 .photoTag {
@@ -417,16 +416,22 @@ h1 {
   font-size: 0.95rem;
 }
 
-.reviewCards {
+.reviewViewport {
   margin: 0.9rem 0 1rem;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.7rem;
-  transition: opacity 350ms ease;
+  overflow: hidden;
 }
 
-.reviewCards.is-fading {
-  opacity: 0;
+.reviewTrack {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 1.4rem) / 3);
+  gap: 0.7rem;
+  transition: transform 500ms ease;
+  will-change: transform;
+}
+
+.reviewTrack.no-transition {
+  transition: none;
 }
 
 .reviewCard {
@@ -622,8 +627,8 @@ h1 {
     grid-template-columns: 1fr;
   }
 
-  .reviewCards {
-    grid-template-columns: 1fr;
+  .reviewTrack {
+    grid-auto-columns: 100%;
   }
 
   .quoteFormWrap {

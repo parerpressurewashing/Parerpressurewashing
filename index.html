@@ -66,15 +66,19 @@
             <div class="heroPhotos">
               <div class="heroPhotoCard beforeCard">
                 <span class="photoTag">Before</span>
-                <img src="./media/gb-photo-8.jpg" alt="Before cleaning example" />
+                <img src="./media/hero-before-1.jpg" alt="Before cleaning example" />
               </div>
               <div class="heroPhotoCard afterCard">
                 <span class="photoTag">After</span>
-                <img src="./media/gb-photo-1.jpg" alt="After cleaning example" />
+                <img src="./media/hero-after-1.jpg" alt="After cleaning example" />
               </div>
-              <div class="heroPhotoCard detailCard">
-                <span class="photoTag">Fresh Finish</span>
-                <img src="./media/gb-photo-3.jpg" alt="Pressure washing result close-up" />
+              <div class="heroPhotoCard lowerCard">
+                <span class="photoTag">Driveways</span>
+                <img src="./media/hero-driveways.png" alt="Driveway cleaning example" />
+              </div>
+              <div class="heroPhotoCard lowerCard">
+                <span class="photoTag">Pool Areas</span>
+                <img src="./media/hero-pool-areas.png" alt="Pool area cleaning example" />
               </div>
             </div>
           </div>
@@ -120,7 +124,9 @@
         <p class="eyebrow">Customer Feedback</p>
         <h2><a class="reviewsHeadingLink" href="https://g.page/r/CV0RI7Dp9FrVEAE/review" target="_blank" rel="noreferrer">Read Our Google Reviews</a></h2>
         <p>See what local Brisbane clients say about our reliability, communication, and results.</p>
-        <div class="reviewCards" id="review-cards"></div>
+        <div class="reviewViewport">
+          <div class="reviewTrack" id="review-track"></div>
+        </div>
         <a class="primaryBtn" href="https://g.page/r/CV0RI7Dp9FrVEAE/review" target="_blank" rel="noreferrer">View All Reviews</a>
       </section>
 
@@ -187,7 +193,7 @@
           window.scrollTo(0, 0);
         });
 
-        var reviewCards = document.getElementById("review-cards");
+        var reviewTrack = document.getElementById("review-track");
         var reviews = [
           {
             name: "Campbell C.",
@@ -215,14 +221,14 @@
           }
         ];
         var reviewIndex = 0;
-        var reviewAnimating = false;
         var reviewTimer = null;
+        var reviewCardWidth = 0;
 
         function renderReviews() {
-          if (!reviewCards) return;
-          reviewCards.innerHTML = "";
-          for (var i = 0; i < 3; i += 1) {
-            var review = reviews[(reviewIndex + i) % reviews.length];
+          if (!reviewTrack) return;
+          reviewTrack.innerHTML = "";
+          var carouselReviews = reviews.concat(reviews.slice(0, 3));
+          carouselReviews.forEach(function (review) {
             var card = document.createElement("article");
             card.className = "reviewCard";
             card.innerHTML =
@@ -230,32 +236,46 @@
               '<img class="reviewStars" src="./media/stars-5.jpg" alt="5 star review" />' +
               '<p class="reviewText">' + review.text + '</p>' +
               '<p class="reviewMeta">Google Review • 5.0</p>';
-            reviewCards.appendChild(card);
-          }
+            reviewTrack.appendChild(card);
+          });
+          updateReviewMetrics();
+        }
+
+        function updateReviewMetrics() {
+          if (!reviewTrack) return;
+          var firstCard = reviewTrack.querySelector(".reviewCard");
+          if (!firstCard) return;
+          var style = window.getComputedStyle(reviewTrack);
+          var gap = parseFloat(style.columnGap || style.gap || "0");
+          reviewCardWidth = firstCard.getBoundingClientRect().width + gap;
+          reviewTrack.style.transform = "translateX(" + (-reviewIndex * reviewCardWidth) + "px)";
         }
 
         function scheduleReviewRotation() {
-          if (!reviewCards) return;
+          if (!reviewTrack) return;
           reviewTimer = window.setTimeout(function () {
-            if (!reviewCards || reviewAnimating) {
-              scheduleReviewRotation();
-              return;
+            reviewIndex += 1;
+            reviewTrack.style.transform = "translateX(" + (-reviewIndex * reviewCardWidth) + "px)";
+
+            if (reviewIndex === reviews.length) {
+              window.setTimeout(function () {
+                reviewTrack.classList.add("no-transition");
+                reviewIndex = 0;
+                reviewTrack.style.transform = "translateX(0px)";
+                window.setTimeout(function () {
+                  reviewTrack.classList.remove("no-transition");
+                }, 50);
+              }, 520);
             }
-            reviewAnimating = true;
-            reviewCards.classList.add("is-fading");
-            window.setTimeout(function () {
-              reviewIndex = (reviewIndex + 1) % reviews.length;
-              renderReviews();
-              reviewCards.classList.remove("is-fading");
-              reviewAnimating = false;
-              scheduleReviewRotation();
-            }, 350);
-          }, 7000);
+
+            scheduleReviewRotation();
+          }, 5000);
         }
 
-        if (reviewCards) {
+        if (reviewTrack) {
           renderReviews();
           scheduleReviewRotation();
+          window.addEventListener("resize", updateReviewMetrics);
         }
 
         var form = document.getElementById("quote-form");
@@ -264,7 +284,7 @@
         if (!form) return;
 
         window.clearTimeout(reviewTimer);
-        if (reviewCards) {
+        if (reviewTrack) {
           scheduleReviewRotation();
         }
 
