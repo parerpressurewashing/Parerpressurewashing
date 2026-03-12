@@ -395,6 +395,7 @@ h1 {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.8rem;
+  justify-content: center;
 }
 
 .serviceCard {
@@ -536,6 +537,7 @@ h1 {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.6rem;
+  justify-content: center;
 }
 
 .galleryTile {
@@ -945,8 +947,28 @@ h1 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.serviceGridWide .serviceCard:nth-child(5) {
+  grid-column: 1;
+}
+
+.serviceGridWide .serviceCard:nth-child(6) {
+  grid-column: 2;
+}
+
+.serviceGridWide .serviceCard:nth-child(7) {
+  grid-column: 3;
+}
+
+.galleryGrid .galleryTile:nth-child(5) {
+  grid-column: 2;
+}
+
+.galleryGrid .galleryTile:nth-child(6) {
+  grid-column: 3;
+}
+
 .servicePoints {
-  margin: 0.65rem 0 0;
+  margin: 0;
   padding-left: 1rem;
   color: #355070;
 }
@@ -1090,6 +1112,14 @@ h1 {
 @media (max-width: 1100px) {
   .serviceGridWide {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .serviceGridWide .serviceCard:nth-child(5),
+  .serviceGridWide .serviceCard:nth-child(6),
+  .serviceGridWide .serviceCard:nth-child(7),
+  .galleryGrid .galleryTile:nth-child(5),
+  .galleryGrid .galleryTile:nth-child(6) {
+    grid-column: auto;
   }
 
   .footerGrid {
