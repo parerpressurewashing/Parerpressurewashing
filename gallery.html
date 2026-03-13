@@ -7,7 +7,7 @@
     <meta name="description" content="View recent exterior cleaning projects from Parer's Pressure Washing across Brisbane." />
     <link rel="stylesheet" href="./styles.css" />
   </head>
-  <body>
+  <body data-page="gallery">
     <main>
       <header class="topBar">
         <div class="container navInner">
@@ -15,11 +15,17 @@
             <img src="./media/logo-user.png" alt="Parer's Pressure Washing logo" class="brandLogo" />
             <span>Parer's Pressure Washing</span>
           </a>
-          <nav>
+          <nav class="desktopNav">
             <a href="./about.html">About</a>
             <a href="./index.html#services">Services</a>
             <a href="./gallery.html" aria-current="page">Gallery</a>
             <a href="./index.html#contact">Contact</a>
+          </nav>
+          <nav class="mobilePageNav" aria-label="Mobile page navigation">
+            <a href="./about.html">About</a>
+            <a href="./services.html">Services</a>
+            <a href="./gallery.html" aria-current="page">Gallery</a>
+            <a href="./contact.html">Contact</a>
           </nav>
           <a class="navCta" href="tel:0421559904">Call 0421 559 904</a>
         </div>
@@ -94,5 +100,6 @@
         </div>
       </footer>
     </main>
+    <script src="./mobile-nav.js"></script>
   </body>
 </html>

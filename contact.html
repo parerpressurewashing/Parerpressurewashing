@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact | Parer's Pressure Washing</title>
+    <meta name="description" content="Request a quote or contact Parer's Pressure Washing for exterior cleaning across Brisbane." />
+    <link rel="stylesheet" href="./styles.css" />
+    <script>
+      window.PARER_GOOGLE_MAPS_API_KEY = "";
+    </script>
+  </head>
+  <body data-page="contact">
+    <main>
+      <header class="topBar">
+        <div class="container navInner">
+          <a class="brand" href="./index.html">
+            <img src="./media/logo-user.png" alt="Parer's Pressure Washing logo" class="brandLogo" />
+            <span>Parer's Pressure Washing</span>
+          </a>
+          <nav class="desktopNav">
+            <a href="./about.html">About</a>
+            <a href="./index.html#services">Services</a>
+            <a href="./gallery.html">Gallery</a>
+            <a href="./index.html#contact" aria-current="page">Contact</a>
+          </nav>
+          <nav class="mobilePageNav" aria-label="Mobile page navigation">
+            <a href="./about.html">About</a>
+            <a href="./services.html">Services</a>
+            <a href="./gallery.html">Gallery</a>
+            <a href="./contact.html" aria-current="page">Contact</a>
+          </nav>
+          <a class="navCta" href="tel:0421559904">Call 0421 559 904</a>
+        </div>
+      </header>
+
+      <section class="hero aboutHero">
+        <div class="heroOverlay"></div>
+        <div class="container heroContent">
+          <div class="heroLayout aboutLayout">
+            <div class="heroCopy">
+              <p class="kicker">Contact</p>
+              <h1>Book A Quote Without The Back And Forth</h1>
+              <p class="lead">Send us your details and we will review the job, confirm the property information, and get back to you with the next step.</p>
+            </div>
+            <div class="heroPhotos">
+              <div class="heroPhotoCard afterCard">
+                <span class="photoTag">Fast Quotes</span>
+                <img src="./media/gb-photo-2.jpg" alt="Exterior cleaning quote request" width="800" height="800" />
+              </div>
+              <div class="heroPhotoCard beforeCard">
+                <span class="photoTag">Local Service</span>
+                <img src="./media/gb-photo-7.jpg" alt="Pressure washing team at work" width="800" height="800" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section container">
+        <div class="quoteFormWrap">
+          <div class="quoteInfoColumn">
+            <p class="eyebrow">Get A Quote</p>
+            <h2>Got A Question Or Need A Quick Quote?</h2>
+            <p class="quoteIntro">Submit your details and we will contact you for a quote.</p>
+            <p class="quoteTrustLine">Common bookings in Ashgrove, Paddington, New Farm, and surrounding Brisbane suburbs.</p>
+            <div class="nextSteps">
+              <h3>What Happens Next</h3>
+              <p>We review your request, confirm the property details, and contact you with the next available quote and booking options.</p>
+            </div>
+          </div>
+          <div class="quoteFormColumn">
+            <form class="quoteForm" id="quote-form" method="POST" novalidate>
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" autocomplete="name" required />
+
+              <label for="phone">Phone Number</label>
+              <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required />
+
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+
+              <label for="address">Address</label>
+              <div class="addressFieldWrap">
+                <input id="address" name="address" type="text" autocomplete="street-address" placeholder="Start typing your full street address" required />
+                <div id="address-options" class="addressOptions" hidden></div>
+              </div>
+
+              <label for="service">Service Needed</label>
+              <select id="service" name="service" required>
+                <option value="" disabled selected>Select a service</option>
+                <option value="House Washing">House Washing</option>
+                <option value="Driveway & Concrete Cleaning">Driveway & Concrete Cleaning</option>
+                <option value="Roof & Solar Panel Cleaning">Roof & Solar Panel Cleaning</option>
+                <option value="Window Cleaning">Window Cleaning</option>
+                <option value="Pressure Washing">Pressure Washing</option>
+                <option value="Deck & Fence Washing">Deck & Fence Washing</option>
+                <option value="Commercial Exterior Cleaning">Commercial Exterior Cleaning</option>
+                <option value="Lawn Care">Lawn Care</option>
+              </select>
+
+              <label for="description">Job Description (max 50 words)</label>
+              <textarea id="description" name="description" rows="4" required></textarea>
+              <small id="desc-help" class="fieldHelp">0/50 words</small>
+
+              <button class="primaryBtn" type="submit">Request Quote</button>
+              <small id="form-status" class="fieldHelp" aria-live="polite"></small>
+            </form>
+            <div id="success-panel" class="successPanel" hidden>
+              <p class="eyebrow">Request Received</p>
+              <h3>Thank You</h3>
+              <p>We have your request and will contact you shortly to confirm the details and next available booking time.</p>
+              <a class="secondaryBtn successCall" href="tel:0421559904">Need us sooner? Call 0421 559 904</a>
+            </div>
+          </div>
+        </div>
+        <div class="contactBackup">
+          <p class="eyebrow">Need A Faster Response?</p>
+          <h2>Contact Us Directly</h2>
+          <ul class="contactList">
+            <li><strong>Phone:</strong> <a href="tel:0421559904">0421 559 904</a></li>
+            <li><strong>Email:</strong> <a href="mailto:parerpressurewashing@gmail.com">parerpressurewashing@gmail.com</a></li>
+            <li><strong>Service Area:</strong> Brisbane &amp; surrounding suburbs</li>
+            <li><strong>Response Time:</strong> Same-day replies where possible</li>
+          </ul>
+        </div>
+      </section>
+
+      <footer class="siteFooter">
+        <div class="container footerGrid">
+          <div>
+            <p class="footerTitle">Parer's Pressure Washing</p>
+            <p class="footerCopy">Reliable exterior cleaning for Brisbane homes and businesses.</p>
+          </div>
+          <div>
+            <p class="footerHeading">Contact</p>
+            <p class="footerCopy"><a href="tel:0421559904">0421 559 904</a></p>
+            <p class="footerCopy"><a href="mailto:parerpressurewashing@gmail.com">parerpressurewashing@gmail.com</a></p>
+          </div>
+          <div>
+            <p class="footerHeading">Quick Links</p>
+            <p class="footerCopy"><a href="./about.html">About</a></p>
+            <p class="footerCopy"><a href="./services.html">Services</a></p>
+            <p class="footerCopy"><a href="./gallery.html">Gallery</a></p>
+          </div>
+          <div>
+            <p class="footerHeading">Social</p>
+            <div class="socialLinks">
+              <a href="https://www.tiktok.com/@parerspressurewashing" target="_blank" rel="noreferrer">TikTok</a>
+              <a href="https://www.facebook.com/search/top?q=parer's%20pressure%20washing" target="_blank" rel="noreferrer">Facebook</a>
+              <a href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
+            </div>
+          </div>
+        </div>
+        <div class="container footerBottom">
+          <p>© 2026 Parer's Pressure Washing. All rights reserved.</p>
+        </div>
+      </footer>
+    </main>
+    <script src="./quote-form.js"></script>
+    <script src="./mobile-nav.js"></script>
+  </body>
+</html>
