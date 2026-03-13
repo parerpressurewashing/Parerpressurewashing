@@ -274,6 +274,25 @@ h1 {
   gap: 0.9rem;
 }
 
+.heroFeatureList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 1rem 0 0;
+}
+
+.heroFeatureList span {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.42rem 0.72rem;
+  border-radius: 999px;
+  border: 1px solid #d5e3f2;
+  background: #ffffff;
+  color: #29486f;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
 .primaryBtn {
   text-decoration: none;
   display: inline-flex;
@@ -364,10 +383,28 @@ h1 {
   border-radius: 16px;
   padding: 1rem;
   box-shadow: none;
+  display: grid;
+  align-content: start;
+  gap: 0.75rem;
 }
 
 .serviceCard h3 {
   font-size: 1.06rem;
+  color: #143d74;
+}
+
+.serviceBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  background: #eef5ff;
+  border: 1px solid #d7e4f4;
+  color: #1c4d86;
+  font-size: 0.8rem;
+  font-weight: 800;
 }
 
 .serviceCard p {
@@ -799,6 +836,10 @@ h1 {
 
   .quoteFormWrap {
     grid-template-columns: 1fr;
+  }
+
+  .heroFeatureList {
+    justify-content: flex-start;
   }
 }
 
