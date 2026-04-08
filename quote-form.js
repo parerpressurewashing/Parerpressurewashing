@@ -1,7 +1,6 @@
 (function () {
   var form = document.getElementById("quote-form");
   var desc = document.getElementById("description");
-  var descHelp = document.getElementById("desc-help");
   var nameField = document.getElementById("name");
   var phoneField = document.getElementById("phone");
   var emailField = document.getElementById("email");
@@ -21,13 +20,6 @@
 
   function wordCount(value) {
     return value.trim() ? value.trim().split(/\s+/).length : 0;
-  }
-
-  function updateWordCount() {
-    if (!desc || !descHelp) return;
-    var words = wordCount(desc.value);
-    descHelp.textContent = words + "/50 words";
-    descHelp.classList.toggle("over", words > 50);
   }
 
   function scrollToField(field) {
@@ -201,11 +193,6 @@
     updateAddressSuggestionsFallback(query, currentSession);
   }
 
-  if (desc) {
-    desc.addEventListener("input", updateWordCount);
-    updateWordCount();
-  }
-
   if (addressField) {
     addressField.addEventListener("input", function () {
       window.clearTimeout(addressLookupTimer);
@@ -265,7 +252,6 @@
           form.hidden = true;
           if (successPanel) successPanel.hidden = false;
           form.reset();
-          updateWordCount();
         } else {
           setStatus("Form service needs activation. Please check parerpressurewashing@gmail.com for FormSubmit activation email.", "is-error");
         }

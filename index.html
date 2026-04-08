@@ -252,8 +252,6 @@
 
               <label for="description">Job Description (max 50 words)</label>
               <textarea id="description" name="description" rows="4" required></textarea>
-              <small id="desc-help" class="fieldHelp">0/50 words</small>
-
               <button class="primaryBtn" type="submit">Request Quote</button>
               <small id="form-status" class="fieldHelp" aria-live="polite"></small>
             </form>
@@ -391,7 +389,6 @@
 
         var form = document.getElementById("quote-form");
         var desc = document.getElementById("description");
-        var descHelp = document.getElementById("desc-help");
         var nameField = document.getElementById("name");
         var phoneField = document.getElementById("phone");
         var emailField = document.getElementById("email");
@@ -410,18 +407,6 @@
 
         function wordCount(value) {
           return value.trim() ? value.trim().split(/\s+/).length : 0;
-        }
-
-        function updateWordCount() {
-          if (!desc || !descHelp) return;
-          var words = wordCount(desc.value);
-          descHelp.textContent = words + "/50 words";
-          descHelp.classList.toggle("over", words > 50);
-        }
-
-        if (desc) {
-          desc.addEventListener("input", updateWordCount);
-          updateWordCount();
         }
 
         function scrollToField(field) {
@@ -652,7 +637,6 @@
                 form.hidden = true;
                 if (successPanel) successPanel.hidden = false;
                 form.reset();
-                updateWordCount();
               } else {
                 setStatus("Form service needs activation. Please check parerpressurewashing@gmail.com for FormSubmit activation email.", "is-error");
               }
