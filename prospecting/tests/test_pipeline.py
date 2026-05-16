@@ -13,6 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from scrape import dedupe, normalise_element, CSV_COLUMNS, build_overpass_query
 from enrich import extract_contacts
 from generate_drafts import build_tone_profile, fill_template_row
+from review import _ensure_status, _write_csv, KEEP_STATUSES, STATUS_COL
 
 
 FIXTURE = Path(__file__).resolve().parent.parent / "sample_data" / "overpass_fixture.json"
@@ -97,6 +98,45 @@ def test_tone_template_no_contact_name():
     print("OK test_tone_template_no_contact_name")
 
 
+def test_review_status_and_resume(tmp_path=None):
+    """Approve/edit/skip filtering + resumability."""
+    import tempfile
+    tmp = Path(tempfile.mkdtemp())
+    rows = [
+        {"name": "A", "draft_message": "hi A", "email": "a@x.test"},
+        {"name": "B", "draft_message": "hi B", "email": "b@x.test"},
+        {"name": "C", "draft_message": "hi C", "email": ""},
+    ]
+    fieldnames = ["name", "draft_message", "email"]
+    fieldnames = _ensure_status(rows, fieldnames)
+    assert STATUS_COL in fieldnames
+    assert all(r[STATUS_COL] == "pending" for r in rows)
+
+    # Simulate user actions
+    rows[0][STATUS_COL] = "approved"
+    rows[1][STATUS_COL] = "edited"
+    rows[1]["draft_message"] = "hi B (edited)"
+    rows[2][STATUS_COL] = "skipped"
+
+    out = tmp / "reviewed.csv"
+    _write_csv(str(out), rows, fieldnames)
+
+    # Read back, confirm status survives, simulate resume
+    import csv as _csv
+    with open(out, newline="", encoding="utf-8") as f:
+        reloaded = list(_csv.DictReader(f))
+    assert reloaded[0][STATUS_COL] == "approved"
+    assert reloaded[1][STATUS_COL] == "edited"
+    assert reloaded[1]["draft_message"] == "hi B (edited)"
+    assert reloaded[2][STATUS_COL] == "skipped"
+
+    # Approved subset = approved + edited only
+    keep = [r for r in reloaded if r[STATUS_COL] in KEEP_STATUSES]
+    assert len(keep) == 2
+    assert {r["name"] for r in keep} == {"A", "B"}
+    print("OK test_review_status_and_resume")
+
+
 if __name__ == "__main__":
     test_normalise_and_dedupe()
     test_overpass_query_format()
@@ -104,4 +144,5 @@ if __name__ == "__main__":
     test_extract_contacts_role_first()
     test_tone_profile_and_template()
     test_tone_template_no_contact_name()
+    test_review_status_and_resume()
     print("\nAll tests passed.")

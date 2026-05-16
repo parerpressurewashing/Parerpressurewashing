@@ -7,7 +7,8 @@ outreach drafts for import into MailerLite.
 ```
 scrape.py            -> public OSM data       -> prospects.csv
 enrich.py            -> visits websites       -> prospects_enriched.csv
-generate_drafts.py   -> learns your tone      -> prospects_drafts.csv  -> MailerLite
+generate_drafts.py   -> learns your tone      -> prospects_drafts.csv
+review.py            -> interactive approval  -> prospects_for_mailerlite.csv  -> MailerLite
 ```
 
 ---
@@ -152,7 +153,44 @@ for Sonnet/Opus if you want higher quality.
 
 ---
 
-## 4. Import to MailerLite
+## 4. Review drafts interactively
+
+Walk through every draft one-by-one, approve/edit/skip each. Saves
+progress after every action, so you can quit and resume.
+
+```bash
+python review.py --in  output/brisbane_hotels_drafts.csv \
+                 --out output/brisbane_hotels_reviewed.csv \
+                 --approved-out output/brisbane_for_mailerlite.csv
+```
+
+For each row you'll see the prospect (name, contact, email, OSM link)
+and the draft. Actions:
+
+| Key | Action |
+|---|---|
+| `a` | Approve as-is, move to next |
+| `e` | Open `$EDITOR` to edit the draft, then move to next |
+| `s` | Skip this prospect (excluded from `--approved-out`) |
+| `b` | Go back to the previous row (reverts its status to pending) |
+| `r` | Restart this row (revert to pending so you can decide later) |
+| `q` | Quit and save progress |
+
+Tips:
+
+- Set your editor with `export EDITOR=nano` (or `vim`, `code -w`, etc).
+- Add `--skip-no-email` to auto-skip rows that have no email address —
+  those can't be reached anyway.
+- Rerun the same command to resume — already-reviewed rows are passed
+  over automatically.
+- Status values written to the reviewed CSV: `approved`, `edited`,
+  `skipped`, `pending`. The `--approved-out` file contains only
+  `approved` + `edited` rows and drops the status column for a clean
+  MailerLite import.
+
+---
+
+## 5. Import to MailerLite
 
 MailerLite import works best when columns match its field names.
 Recommended manual rename / mapping in the import UI:
@@ -189,6 +227,7 @@ prospecting/
 ├── scrape.py               OSM Overpass scraper
 ├── enrich.py               website -> contact name/email extractor
 ├── generate_drafts.py      tone profile + draft generator
+├── review.py               interactive approve/edit/skip TUI
 ├── sample_data/
 │   ├── overpass_fixture.json
 │   └── past_messages_example.txt
