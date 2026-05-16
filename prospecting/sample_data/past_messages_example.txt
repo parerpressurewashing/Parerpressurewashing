@@ -1,0 +1,9 @@
+# Replace this file with your real exported messages.
+# One message per line. Lines starting with # are ignored.
+# Only include messages YOU sent. Strip phone numbers and client names.
+Hey mate, just confirming we're locked in for Saturday morning around 8.
+Cheers for the quick reply! I'll swing by tomorrow arvo to take a look and shoot a quote through.
+All done — looks heaps better. Invoice on its way through, thanks again!
+G'day, Louis from Parer's Pressure Washing. Got your details from the contact form — happy to come quote whenever suits.
+No worries at all, just let me know when you're ready and we'll lock in a time.
+Cheers, appreciate the referral!
