@@ -1,0 +1,10 @@
+output/*.csv
+output/*.json
+!output/.gitkeep
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+past_messages.txt
+tone_profile.json

@@ -1,0 +1,54 @@
+{
+  "elements": [
+    {
+      "type": "node",
+      "id": 12345,
+      "lat": -27.4698,
+      "lon": 153.0251,
+      "tags": {
+        "name": "Example Brisbane Hotel",
+        "tourism": "hotel",
+        "addr:housenumber": "100",
+        "addr:street": "Queen Street",
+        "addr:suburb": "Brisbane City",
+        "addr:postcode": "4000",
+        "addr:state": "QLD",
+        "phone": "+61 7 1234 5678",
+        "website": "https://example-hotel.test",
+        "contact:email": "info@example-hotel.test"
+      }
+    },
+    {
+      "type": "way",
+      "id": 67890,
+      "center": {"lat": -27.4710, "lon": 153.0260},
+      "tags": {
+        "name": "Example Shopping Centre",
+        "shop": "mall",
+        "addr:suburb": "Fortitude Valley",
+        "addr:state": "QLD",
+        "website": "http://example-centre.test"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11111,
+      "lat": -27.4720,
+      "lon": 153.0270,
+      "tags": {
+        "name": "Example Cafe",
+        "amenity": "cafe"
+      }
+    },
+    {
+      "type": "node",
+      "id": 22222,
+      "lat": -27.4720,
+      "lon": 153.0270,
+      "tags": {
+        "name": "Example Cafe",
+        "amenity": "cafe"
+      }
+    }
+  ]
+}
