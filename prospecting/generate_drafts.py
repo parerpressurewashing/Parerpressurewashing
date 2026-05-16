@@ -4,7 +4,7 @@ Generate per-prospect outreach drafts that match your tone.
 
 Two modes:
   1. Template (default) - extracts tone features from past_messages.txt and
-     fills templates. No API key needed.
+     fills templates that mirror your phrasing. No API key needed.
   2. LLM (--llm)        - sends tone samples + prospect details to Claude.
      Requires ANTHROPIC_API_KEY env var and `pip install anthropic`.
 
@@ -22,20 +22,76 @@ from __future__ import annotations
 
 import csv
 import json
-import os
 import random
 import re
 import statistics
-import sys
+from collections import Counter
 from pathlib import Path
 
 import click
 
-CONTRACTIONS = {"don't", "i'll", "we'll", "you'll", "we're", "i'm", "you're", "can't", "won't", "it's", "that's"}
+CONTRACTIONS = {"don't", "i'll", "we'll", "you'll", "we're", "i'm", "you're",
+                "can't", "won't", "it's", "that's", "what's"}
 GREETINGS_CASUAL = {"hi", "hey", "g'day", "morning", "afternoon"}
 GREETINGS_FORMAL = {"hello", "good morning", "good afternoon", "dear"}
-SIGNOFFS_CASUAL = {"cheers", "thanks", "ta", "talk soon", "thanks heaps"}
-SIGNOFFS_FORMAL = {"kind regards", "regards", "best regards", "sincerely"}
+SIGNOFFS_CASUAL = {"cheers", "ta", "talk soon", "thanks heaps", "many thanks"}
+SIGNOFFS_FORMAL = {"kind regards", "best regards", "sincerely", "yours"}
+
+# Phrases we'll try to detect because they tend to be load-bearing voice markers.
+SOFTENERS = [
+    "just wondering", "just wanted to", "just letting you know",
+    "just checking", "just want to", "if possible", "if that suits",
+    "if that's ok", "if it suits", "no worries", "no pressure",
+    "absolutely no stress", "no rush", "if you could please",
+    "would be amazing", "would be brilliant", "would be greatly appreciated",
+    "if you may also",
+]
+
+CLOSERS = [
+    "look forward to seeing you", "look forward to speaking with you",
+    "look forward to hearing from you", "looking forward to",
+    "see you then", "see you soon", "many thanks", "thanks so much",
+    "hope you are well", "hope your well", "hope you're well",
+    "hope you have an amazing", "hope you have a great",
+]
+
+GREET_CHUNK_RE = re.compile(r"^(hi|hey|hello)[^.,!?]*[,.!?]\s*", re.IGNORECASE)
+SIGNATURE_RE = re.compile(r"(?:many thanks|cheers|regards)[,.\s]*louis\.?\s*$", re.IGNORECASE)
+
+
+def _strip_greeting_and_signature(msg: str) -> str:
+    """Drop the leading 'Hi X,' and trailing 'Many thanks, Louis.' so we can study the middle."""
+    body = GREET_CHUNK_RE.sub("", msg).strip()
+    body = SIGNATURE_RE.sub("", body).strip().rstrip(",.")
+    return body
+
+
+def _count_phrases(msgs: list[str], phrases: list[str]) -> list[tuple[str, int]]:
+    text = " ".join(msgs).lower()
+    counts = [(p, text.count(p)) for p in phrases]
+    return sorted([c for c in counts if c[1] > 0], key=lambda x: -x[1])
+
+
+def _common_first_sentence_after_greeting(msgs: list[str], top_n: int = 5) -> list[str]:
+    """What does Louis typically say *first* after 'Hi X,'?"""
+    firsts: list[str] = []
+    for m in msgs:
+        body = GREET_CHUNK_RE.sub("", m).strip()
+        if not body:
+            continue
+        first = re.split(r"[.!?]", body, maxsplit=1)[0].strip()
+        if 2 <= len(first.split()) <= 12:
+            firsts.append(first.lower())
+    counter = Counter(firsts)
+    return [phrase for phrase, _ in counter.most_common(top_n)]
+
+
+def _common_signoff(msgs: list[str]) -> str | None:
+    matches = [SIGNATURE_RE.search(m) for m in msgs]
+    matches = [m.group(0).strip().rstrip(".") for m in matches if m]
+    if not matches:
+        return None
+    return Counter(matches).most_common(1)[0][0]
 
 
 def build_tone_profile(text: str) -> dict:
@@ -55,10 +111,6 @@ def build_tone_profile(text: str) -> dict:
     exclamations = sum(m.count("!") for m in msgs) / len(msgs)
     emoji_rate = sum(1 for m in msgs if re.search(r"[\U0001F300-\U0001FAFF]|:\)|:\(", m)) / len(msgs)
 
-    # Sample openers and closers
-    openers = [m.split(".")[0][:60] for m in msgs[:30] if len(m) > 10]
-    closers = [m.split(".")[-1].strip()[-60:] for m in msgs[:30] if len(m) > 10]
-
     formality = "casual" if (casual_greet + casual_sign) >= (formal_greet + formal_sign) else "formal"
 
     return {
@@ -69,46 +121,51 @@ def build_tone_profile(text: str) -> dict:
         "contraction_rate": round(contraction_rate, 2),
         "exclamations_per_msg": round(exclamations, 2),
         "uses_emoji": emoji_rate > 0.1,
-        "sample_openers": openers[:10],
-        "sample_closers": closers[:10],
+        "common_first_sentences": _common_first_sentence_after_greeting(msgs),
+        "common_softeners": _count_phrases(msgs, SOFTENERS)[:8],
+        "common_closers": _count_phrases(msgs, CLOSERS)[:8],
+        "signoff": _common_signoff(msgs) or "Many thanks, Louis",
     }
 
 
-TEMPLATES_CASUAL = [
-    "Hi {first_name}, Louis here from Parer's Pressure Washing in Brisbane. "
-    "Saw {company} and reckon your {target} would scrub up really well with a "
-    "professional clean. Happy to swing by for a quick quote whenever suits — "
-    "no pressure either way. Cheers, Louis",
+# Templates written to mirror Louis's actual phrasing:
+#   - "Hi [name], hope you are well." opener
+#   - "Just wondering if..." softener
+#   - "no pressure / absolutely no stress" opt-out
+#   - "Look forward to hearing from you. Many thanks, Louis." closer
 
-    "Hey {first_name}, Louis from Parer's Pressure Washing. We look after a "
-    "fair few {category_friendly} around Brisbane and noticed {company}. "
-    "Keen to drop a quick quote your way if you're after a refresh on the "
-    "{target}. Let me know — Louis",
+TEMPLATES_NAMED = [
+    "Hi {first_name}, hope you are well. Louis here from Parer's Pressure "
+    "Washing, a Brisbane exterior cleaning business. Just wondering if "
+    "{company} would be open to a free quote on the {target} — happy to come "
+    "by whenever suits, absolutely no pressure if not the right time. "
+    "Look forward to hearing from you. {signoff}",
+
+    "Hi {first_name}, hope your well. Louis from Parer's Pressure Washing in "
+    "Brisbane here. Just wanted to reach out as we look after a fair few "
+    "{category_friendly} around town and would love the chance to send "
+    "through a no-obligation quote for the {target} at {company}. No worries "
+    "at all if the timing isn't right. {signoff}",
+
+    "Hi {first_name}, hope you are well. My name is Louis Parer, I run "
+    "Parer's Pressure Washing in Brisbane. Just wondering if you'd be "
+    "interested in a quick quote on the {target} at {company} — happy to "
+    "come and have a look whenever suits. Look forward to speaking with you "
+    "soon. {signoff}",
 ]
 
-TEMPLATES_FORMAL = [
-    "Hello {first_name}, my name is Louis Parer from Parer's Pressure Washing, "
-    "a Brisbane-based exterior cleaning business. I'd like to offer {company} a "
-    "complimentary quote for {target} cleaning at your convenience. "
-    "Kind regards, Louis Parer",
+TEMPLATES_NONAME = [
+    "Hi there, hope you are well. Louis here from Parer's Pressure Washing, "
+    "a Brisbane-based exterior cleaning business. Just wondering if "
+    "{company} would be open to a free quote on the {target} — no pressure "
+    "at all, happy to swing by whenever suits. Look forward to hearing from "
+    "you. {signoff}",
 
-    "Hello {first_name}, I'm writing on behalf of Parer's Pressure Washing in "
-    "Brisbane. We provide professional exterior cleaning to {category_friendly} "
-    "and would welcome the opportunity to quote on the {target} at {company}. "
-    "Regards, Louis",
-]
-
-# Fallback when no contact_name is available
-TEMPLATES_NONAME_CASUAL = [
-    "Hi there, Louis from Parer's Pressure Washing in Brisbane. We do "
-    "exterior cleaning for {category_friendly} and thought {company}'s "
-    "{target} could do with a refresh. Happy to send a quick no-obligation "
-    "quote — just let me know. Cheers, Louis",
-]
-TEMPLATES_NONAME_FORMAL = [
-    "Hello, my name is Louis Parer of Parer's Pressure Washing, Brisbane. "
-    "I'd like to offer {company} a complimentary quote for exterior "
-    "cleaning of the {target}. Regards, Louis Parer",
+    "Hi there, hope your well. Louis from Parer's Pressure Washing in "
+    "Brisbane. Just wanted to reach out as we look after a fair few "
+    "{category_friendly} around the area and would love to send through a "
+    "no-obligation quote on the {target} at {company}. Absolutely no stress "
+    "if the timing isn't right. {signoff}",
 ]
 
 CATEGORY_FRIENDLY = {
@@ -119,7 +176,7 @@ CATEGORY_FRIENDLY = {
 
 TARGET_FOR_CATEGORY = {
     "hotels": "facade, walkways and carpark",
-    "shopping": "storefront, walkways and carpark",
+    "shopping": "storefronts, walkways and carpark",
     "storefronts": "shopfront, footpath and awnings",
 }
 
@@ -129,7 +186,6 @@ def first_name(full_name: str) -> str:
 
 
 def fill_template_row(row: dict, profile: dict, rng: random.Random) -> str:
-    formality = profile["formality"]
     fname = first_name(row.get("contact_name", ""))
     cat = row.get("category", "")
     ctx = {
@@ -137,11 +193,9 @@ def fill_template_row(row: dict, profile: dict, rng: random.Random) -> str:
         "company": row.get("name", "your business"),
         "category_friendly": CATEGORY_FRIENDLY.get(cat, "local businesses"),
         "target": TARGET_FOR_CATEGORY.get(cat, "building exterior"),
+        "signoff": profile.get("signoff", "Many thanks, Louis"),
     }
-    if fname:
-        pool = TEMPLATES_CASUAL if formality == "casual" else TEMPLATES_FORMAL
-    else:
-        pool = TEMPLATES_NONAME_CASUAL if formality == "casual" else TEMPLATES_NONAME_FORMAL
+    pool = TEMPLATES_NAMED if fname else TEMPLATES_NONAME
     template = rng.choice(pool)
     return template.format(**ctx)
 
@@ -154,17 +208,29 @@ def llm_draft(row: dict, profile: dict, samples: list[str], model: str) -> str:
 
     client = Anthropic()
     system = (
-        "You write short outreach messages (SMS or email opener length, 2-4 sentences) "
-        "from Louis Parer of Parer's Pressure Washing, a Brisbane exterior cleaning "
-        "business. Match the writer's tone exactly using the provided tone profile and "
-        "sample messages. Be specific to the prospect. Never invent facts about the "
-        "prospect's business beyond what is provided. Always include a soft opt-out "
-        "line at the end (e.g., 'no worries if not the right time'). Output the message "
-        "only, no preamble."
+        "You are drafting a single outreach message from Louis Parer of Parer's "
+        "Pressure Washing, a Brisbane exterior cleaning business reaching out to a "
+        "commercial prospect (hotel, shopping centre, storefront) for the FIRST "
+        "time. Mirror Louis's voice EXACTLY using the provided tone profile and "
+        "sample messages. Specifically:\n"
+        "  - Open with 'Hi [name], hope you are well.' (or 'hope your well' if "
+        "    that variant appears in samples).\n"
+        "  - Introduce yourself briefly in the first or second sentence.\n"
+        "  - Use a soft 'Just wondering if...' or 'Just wanted to reach out as...' "
+        "    pattern for the ask.\n"
+        "  - Include a soft opt-out ('no pressure', 'absolutely no stress if not "
+        "    the right time', etc).\n"
+        "  - Close with 'Look forward to hearing from you' (or similar) and the "
+        "    signoff from the profile (e.g., 'Many thanks, Louis').\n"
+        "  - 3-5 sentences total. Plain text. No emoji unless the profile says "
+        "    so.\n"
+        "  - Never invent facts about the prospect's business beyond what is "
+        "    provided. If contact_name is missing, address them as 'Hi there'.\n"
+        "Output the message only, no preamble, no quotes."
     )
     user = json.dumps({
         "tone_profile": profile,
-        "sample_messages": samples[:20],
+        "sample_messages": samples[:15],
         "prospect": {
             "name": row.get("name"),
             "category": row.get("category"),
@@ -200,7 +266,8 @@ def main(csv_path: str, tone_path: str, out_path: str, llm: bool, model: str, se
     profile = build_tone_profile(tone_text)
     Path(profile_out).write_text(json.dumps(profile, indent=2), encoding="utf-8")
     click.echo(f"Tone profile: formality={profile['formality']}, "
-               f"avg_words={profile['avg_words']}, samples={profile['message_count']}")
+               f"avg_words={profile['avg_words']}, samples={profile['message_count']}, "
+               f"signoff={profile.get('signoff')!r}")
     click.echo(f"  -> wrote {profile_out}")
 
     samples = [m.strip() for m in tone_text.splitlines() if m.strip() and not m.startswith("#")]
